@@ -20,7 +20,7 @@ Further data can be easily requested from the API through the mnis library's cor
 The mnis library is unofficial. I use it to help with my work and it is shared "as is" in case it is useful to others.
 
 ### Python requirements
-The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It requires the [requests][requests] package.
+The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It requires the [requests][requests] package (which pip will install automatically if it is not already present).
 
 ### Installation
 The easiest way to install the package is with pip. 
