@@ -20,7 +20,7 @@ Further data can be easily requested from the API through the mnis library's cor
 The mnis library is unofficial. I use it to help with my work and it is shared "as is" in case it is useful to others.
 
 ### Python requirements
-The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It has no dependencies and only uses packages in core Python.
+The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It requires the [requests][requests] package.
 
 ### Installation
 The easiest way to install the package is with pip. 
@@ -92,4 +92,5 @@ print(sd[103]['list_name'], '-', sd[103]['party'])
 A deeper dive into the the library and the API will appear on my blog shortly, showing how to use the library to further customise API requests, and how to extend it to write your own data extraction functions. I will update this readme with the link as soon as it is posted.
 
 [mnisapi]: <http://data.parliament.uk/membersdataplatform/memberquery.aspx>
+[requests]: <http://docs.python-requests.org/en/master/>
 
