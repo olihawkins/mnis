@@ -61,11 +61,11 @@ sd = mnis.getSummaryDataForMembers(members, d)
 # Save the summary data into members.csv
 saveSummaryDataForMembers(sd, "members.csv")
 ```
-Note that a date is passed to both the functions for getting member data - in this case getCommonsMembersOn - and to the functions for extracting summary data - getSummaryDataForMembers and saveSummaryDataForMembers. This is because the functions that extract summary data for each MP from their full record need to return the party, constituency, and number of days served *for a particular date*. 
+Note that a date is passed to both the functions for getting member data (in this case getCommonsMembersOn) and to the functions for extracting summary data (getSummaryDataForMembers). This is because the functions that extract summary data for each MP from their full record need to return the party, constituency, and number of days served for a particular date.
 
 In most cases the date used to get members will be the same as the date used to extract summary data about those members, **but it doesn't have to be**. This means you can get all MPs serving on a particular date, or between particular dates, and then find out which parties and constituencies they were representing on a diffrent date. If an MP was not serving on the date used for summarising the data, the summary data will report that they weren't serving on that date. This means you can do things like find out which of a group of MPs serving on one date were still serving at a later date.
 
-To give an example, the following code gets all MPs who served during the 2010-15 Parliament, including those elected at by-elections. If the date passed to getSummaryDataForMembers is the same as the start of the Parliament then Douglas Carswell MP is shown as a members of the Conservative Party. But if the date passed to getSummaryDataForMembers is the same as at the end of the Parliament, his party is the UK Independence Party.
+To give an example, the following code gets all MPs who served during the 2010-15 Parliament, including those elected at by-elections. If the date passed to getSummaryDataForMembers is the same as the start of the Parliament then Douglas Carswell MP is shown as a member of the Conservative Party. But if the date passed to getSummaryDataForMembers is the same as at the end of the Parliament his party is the UK Independence Party.
 ```python
 import mnis
 import datetime
