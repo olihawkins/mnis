@@ -3,9 +3,7 @@
 
 """
 Name: mnislib.py
-Version: 0.1
 Author: Oliver Hawkins
-Last Modified: 18 Aug 2016
 About: A library of ad-hoc functions for downloading data from 
 the Members Names Information Service (MNIS) at data.parliament.uk. 
 

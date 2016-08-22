@@ -4,9 +4,8 @@
 """
 Name: housedata.py
 Author: Oliver Hawkins
-Last modified: 14 Jan 2016
-About: This module provides data on the length of Parliaments 
-and dissolution periods for use with the mnis package and mnislib module.
+About: This module provides data on the length of Parliaments and 
+dissolution periods for use with the mnis package and mnislib module.
 Dissolution dates can be found here:
 https://goo.gl/o5xV7g
 

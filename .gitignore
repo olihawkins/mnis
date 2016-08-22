@@ -1,6 +1,7 @@
 # Directories
-production
 __pycache__
+production
+pypi
 
 # Files
 .DS_Store
