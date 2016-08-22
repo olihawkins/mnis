@@ -19,11 +19,15 @@ Further data can be easily requested from the API through the mnis library's cor
 
 The mnis library is unofficial. I use it to help with my work and it is shared "as is" in case it is useful to others.
 
-### Installation
-Installation with pip is on its way, but in the meantime you can install the package by cloning the repository into a folder called `mnis`, making sure its parent directory is in the PYTHONPATH.
-
-### Python version support
+### Python requirements
 The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It has no dependencies and only uses packages in core Python.
+
+### Installation
+The easiest way to install the package is with pip. 
+```sh
+pip install mnis
+``` 
+Alternatively install the package by cloning the repository into a folder called `mnis`, making sure its parent directory is in the PYTHONPATH.
 
 ### Tests
 Run `python test_mnis.py` to run the unit tests.
