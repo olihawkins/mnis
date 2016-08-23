@@ -183,7 +183,9 @@ class testGetCommonsMembersAtElection(unittest.TestCase):
 
 	def testGetCommonsMembersAtElection(self):
 
-		electionIds = [1983, 1987, 1992, 1997, 2001, 2005, 2010, 2015]
+		electionIds = [ \
+			'1983', '1987', '1992', '1997', '2001', '2005', '2010', '2015']
+		
 		outputParameters = ['Constituencies', 'Parties', 'HouseMemberships']
 
 		for electionId in electionIds:
@@ -206,7 +208,7 @@ class testGetCommonsMembersAtElection(unittest.TestCase):
 	def testCommonsMembersAtElectionFails(self):
 
 		self.assertRaises(mnislib.ElectionIdError, \
-			mnislib.getCommonsMembersAtElection, 1979)
+			mnislib.getCommonsMembersAtElection, '1979')
 
 
 class testBuildMnisUrl(unittest.TestCase):
@@ -607,13 +609,14 @@ class testSaveSummaryDataForMembers(unittest.TestCase):
 class testDownloadMembers(unittest.TestCase):
 
 	"""
-	Tests downloadMembers and checks it writes correct data. For now
-	this test is empty as the function is a very simple wrapper around
-	getCommonsMembersOn() and saveSummaryDataForMembers(), both of which are
-	tested elsewhere. Retesting the combined functionality here would only
-	add another download to the test suite and unduly increase the time it
-	takes to run the tests. If this function becomes more complex in future 
-	a test should be added.
+	Tests downloadMembers and checks it writes correct data. 
+
+	For now this test is empty as the function is a very simple wrapper around 
+	getCommonsMembersOn(), getSummaryDataForMembers(), 
+	and saveSummaryDataForMembers(), each of which are tested elsewhere. 
+	Retesting the combined functionality here would only add another download 
+	to the test suite and unduly increase the time it takes to run the tests. 
+	If this function becomes more complex in future a test should be added.
 	"""
 
 	def testDownloadMembers(self):

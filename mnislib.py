@@ -86,11 +86,12 @@ def getCommonsMembersAtElection(generalElectionId, outputParameters= \
 	"""
 	Returns all Commons members elected at a given general election.
 	The MNIS system holds complete data on general elections since 1983. 
-	The generalElectionId must be one of the following ints: 1983, 1987, 
+	The generalElectionId must be one of the following strings: 1983, 1987, 
 	1992, 1997, 2001, 2005, 2010, 2015.
 	"""
 
-	validElectionIds = [1983, 1987, 1992, 1997, 2001, 2005, 2010, 2015]
+	validElectionIds = [ \
+		'1983', '1987', '1992', '1997', '2001', '2005', '2010', '2015']
 
 	if generalElectionId not in validElectionIds:
 		raise ElectionIdError("Invalid id in getCommonsMembersAtElection")

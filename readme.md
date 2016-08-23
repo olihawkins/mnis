@@ -89,6 +89,23 @@ sd = mnis.getSummaryDataForMembers(members, endDate)
 # Douglas Carswell's party is "UK Independence Party"
 print(sd[103]['list_name'], '-', sd[103]['party'])
 ```
+
+### API gotchas
+
+The Members Names database is an administrative system as well as a record of historical data, and there are some inconsistencies in recording practices to look out for. In particular, in some cases MPs are listed as serving up to the date of the general election at which they were defeated or stepped down, while in others they are listed as serving up to the date of dissolution before the general election at which they were defeated or stepped down. 
+
+This does not affect the calculation of the number of days served by a member, which excludes any period of dissolution irrespective of how the memberships are recorded. However, it does affect the MPs returned by date-based API requests. For example, requesting all members serving on the date of the 2010 General Election returns the 650 MPs elected on that date *and* the 225 MPs who were either defeated or stood down at that election. This is not the case for the 2015 General Election: a date-based request for members serving on the date of that election returns just those elected on that day.
+
+There are two solutions to this problem. First, if you are only interested in MPs returned at a particular general election you can use the getCommonsMembersAtElection function, which uses a different API call and only retuns those MPs elected on that date. The function takes the year of the general election as a string and will return records for any general election since 1983.
+
+```python
+members = mnis.getCommonsMembersAtElection('2010')
+```
+
+Alternatively, if you want to request MPs based on a date range starting at a general election, use the day *after* the general election as the start date. There aren't by-elections on the day after a general election, so requesting the MPs serving on the day following a general election is equivalent to asking for the MPs elected at that election. This was how the data was requested in the example above showing Douglas Carswell's change of party.
+
+### Further information
+
 A deeper dive into the mnis library and the API will appear on my blog shortly, showing how to use the library to further customise API requests and how to extend it to write your own data extraction functions for other data. I will update this readme with the link as soon as it is posted.
 
 [mnisapi]: <http://data.parliament.uk/membersdataplatform/memberquery.aspx>
