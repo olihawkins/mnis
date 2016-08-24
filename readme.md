@@ -15,7 +15,7 @@ The summary data on MPs that the library's higher level functions provide by def
   - Date became an MP
   - Number of days service (excluding dissolution periods)
 
-The mnis library is *unofficial*. It is shared "as is" in case it is useful.
+The mnis library is **unofficial**. It is shared "as is" in case it is useful.
 
 ### Python requirements
 The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It requires the [requests][requests] package, which pip will install automatically if it is not already present.
