@@ -17,7 +17,7 @@ The summary data on MPs that the library's higher level functions provide by def
 
 Further data can also be requested from the API through the mnis library's functions for retrieving data.
 
-The mnis library is unofficial. I use it to help with my work and it is shared "as is" in case it is useful.
+The mnis library is *unofficial*. It is shared "as is" in case it is useful.
 
 ### Python requirements
 The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It requires the [requests][requests] package, which pip will install automatically if it is not already present.
@@ -63,9 +63,9 @@ mnis.saveSummaryDataForMembers(sd, 'members.csv')
 ```
 Note that a date is passed to functions for both downloading member data (in this case getCommonsMembersOn) and to functions for extracting summary data (getSummaryDataForMembers). This is because the functions that extract summary data for each MP from their full record need to return the party, constituency, and number of days served for a particular date.
 
-In most cases the date used to get members will be the same as the date used to extract summary data about those members, **but it doesn't have to be**. This means you can get all MPs serving on a particular date, or between particular dates, and then find out which parties and constituencies they were representing on a diffrent date. If an MP was not serving on the date used for summarising the data, the summary data will report that they weren't serving on that date. This means you can do things like find out which of a group of MPs serving on one date were still serving at a later date.
+In most cases the date used to get members will be the same as the date used to extract summary data about those members, **but it doesn't have to be**. This means you can get all MPs serving on a particular date, or between particular dates, and then find out which parties and constituencies they were representing on a different date. If an MP was not serving on the date used for summarising the data, the summary data will report that they weren't serving on that date. This means you can do things like find out which of a group of MPs serving on one date were still serving at a later date.
 
-To give an example, the following code gets all MPs who served during the 2010-15 Parliament, including those elected at by-elections. If the date passed to getSummaryDataForMembers is for the start of the Parliament Douglas Carswell MP is shown as a member of the Conservative Party; but if the date passed to getSummaryDataForMembers is for the end of the Parliament his party is shown as the UK Independence Party.
+To give an example, the following code gets all MPs who served during the 2010-15 Parliament, including those elected at by-elections. If the date passed to getSummaryDataForMembers is for the start of the Parliament, Douglas Carswell MP is shown as a member of the Conservative Party; but if the date passed to getSummaryDataForMembers is for the end of the Parliament, his party is shown as the UK Independence Party.
 ```python
 import mnis
 import datetime
@@ -77,16 +77,16 @@ endDate = datetime.date(2015, 3, 30)
 # Download the full data for MPs serving between the given dates as a list
 members = mnis.getCommonsMembersBetween(startDate, endDate)
 
-# Get the summary data for these members on the startDate:
+# Get the summary data for these members on the startDate
 sd = mnis.getSummaryDataForMembers(members, startDate)
 
-# Douglas Carswell's party is "Conservative"
+# Douglas Carswell's party is Conservative
 print(sd[103]['list_name'], '-', sd[103]['party'])
 
-# Get the summary data for these members on the endDate:
+# Get the summary data for these members on the endDate
 sd = mnis.getSummaryDataForMembers(members, endDate)
 
-# Douglas Carswell's party is "UK Independence Party"
+# Douglas Carswell's party is UK Independence Party
 print(sd[103]['list_name'], '-', sd[103]['party'])
 ```
 
@@ -94,19 +94,17 @@ print(sd[103]['list_name'], '-', sd[103]['party'])
 
 The Members Names database is an administrative system as well as a record of historical data, and there are some inconsistencies in recording practices to look out for. In particular, in some cases MPs are listed as serving up to the date of the general election at which they were defeated or stepped down, while in others they are listed as serving up to the date of dissolution before the general election at which they were defeated or stepped down. 
 
-This does not affect the calculation of the number of days served by a member, which excludes any period of dissolution irrespective of how the memberships are recorded. However, it does affect the MPs returned by date-based API requests. For example, requesting all members serving on the date of the 2010 General Election returns the 650 MPs elected on that date *and* the 225 MPs who were either defeated or stood down at that election. This is not the case for the 2015 General Election: a date-based request for members serving on the date of that election returns just those elected on that day.
+This does not affect the calculation of the number of days served by a member, which excludes any period of dissolution irrespective of how the memberships are recorded. However, it does affect the MPs returned by date-based API requests. For example, requesting all members serving on the date of the 2010 General Election with getCommonsMembersOn returns the 650 MPs elected on that date *and* the 225 MPs who were either defeated or stood down at that election. This is not the case for the 2015 General Election: a date-based request for members serving on the date of that election returns just those elected on that day.
 
-There are two solutions to this problem. First, if you are only interested in MPs returned at a particular general election you can use the getCommonsMembersAtElection function, which uses a different API call and only retuns those MPs elected on that date. The function takes the year of the general election as a string and will return records for any general election since 1983.
+There are two simple solutions to this problem. First, if you are only interested in MPs returned at a particular general election you can use the getCommonsMembersAtElection function, which uses a different API call and only retuns those MPs elected on that date. The function takes the year of the general election as a string and will return records for any general election since 1983.
 
 ```python
 members = mnis.getCommonsMembersAtElection('2010')
 ```
 
-Alternatively, if you want to request MPs based on a date range starting at a general election, use the day *after* the general election as the start date. There aren't by-elections on the day after a general election, so requesting the MPs serving on the day following a general election is equivalent to asking for the MPs elected at that election. This was how the data was requested in the example above showing Douglas Carswell's change of party.
+Alternatively, if you want to request MPs based on a date range starting at a general election, use the day *after* the general election as the start date. There aren't by-elections on the day after a general election, so requesting the MPs serving on the day following a general election is equivalent to asking for the MPs elected at that election (assuming no MPs died on election day). This was how the data was requested in the example above showing Douglas Carswell's change of party.
 
-### Further information
-
-A deeper dive into the mnis library and the API will appear on my blog shortly, showing how to use the library to further customise API requests and how to extend it to write your own data extraction functions for other data. I will update this readme with the link as soon as it is posted.
+A less simple solution, which provides the most fine-grained control, is to request all members with a date-based request and then filter the list using the dates of their House memberships. In most cases this sort of approach is not necessary, but it is wise to check the data returned by the API before automating any analysis.
 
 [mnisapi]: <http://data.parliament.uk/membersdataplatform/memberquery.aspx>
 [requests]: <http://docs.python-requests.org/en/master/>
