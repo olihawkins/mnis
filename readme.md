@@ -15,8 +15,6 @@ The summary data on MPs that the library's higher level functions provide by def
   - Date became an MP
   - Number of days service (excluding dissolution periods)
 
-Further data can also be requested from the API through the mnis library's functions for retrieving data.
-
 The mnis library is *unofficial*. It is shared "as is" in case it is useful.
 
 ### Python requirements
