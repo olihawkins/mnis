@@ -126,8 +126,8 @@ def getCommonsMembers(urlParameters, outputParameters= \
 
 	"""
 	Returns all commons members with the given URL paramemters. The 
-	"house=Commons" parameter is not necessary as it is provided by the 
-	function. The output parameters specify what additional information 
+	"house=Commons" parameter is not necessary as it is provided by 
+	buildMnisUrl. The output parameters specify what additional information 
 	about MPs the API should return. The API only allows up to three 
 	output parameters per request.
 	"""
@@ -149,7 +149,7 @@ def getCommonsMembers(urlParameters, outputParameters= \
 	return members
 
 
-# Functions which retrieve and process data for members ----------------------
+# Functions that retrieve and process data for members ----------------------
 
 def getListNameForMember(member):
 
@@ -182,8 +182,8 @@ def getConstituencyForMember(member, onDate):
 	MP on the given date the function returns a string indicating the member 
 	was not serving on the specified date. The member must be a member object
 	returned by one of the getCommonsMembers functions, and must contain data
-	on party memberships which is requested with the output parameter for 
-	'Constituencies'. This parameter is one of the defaults for the 
+	on constituency memberships which is requested with the output parameter 
+	for 'Constituencies'. This parameter is one of the defaults for the 
 	getCommonsMembers functions. The onDate should be a datetime.date.
 	"""
 
@@ -416,6 +416,9 @@ def getSummaryDataForMembers(members, onDate):
 	- listed name
 	- constituency
 	- party
+	- date of birth
+	- gender
+	- date first became an mp
 	- number of days service
 
 	In order to produce this data the members passed to the function must
@@ -455,6 +458,9 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	- listed name
 	- constituency
 	- party
+	- date of birth
+	- gender
+	- date first became an mp
 	- number of days service
 
 	In order to produce this data the members passed to the function must 
@@ -490,6 +496,9 @@ def downloadMembers(onDate, csvName):
 	- listed name
 	- constituency
 	- party
+	- date of birth
+	- gender
+	- date first became an mp
 	- number of days service
 
 	The data shows information about each members on the given date, so the
