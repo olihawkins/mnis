@@ -438,7 +438,7 @@ def getSummaryDataForMembers(members, onDate):
 		memberData['party'] = getPartyForMember(member, onDate)
 		memberData['date_of_birth'] = getDateOfBirthForMember(member)
 		memberData['gender'] = getGenderForMember(member)
-		memberData['start_date'], memberData['days_service'] = \
+		memberData['first_start_date'], memberData['days_service'] = \
 			getServiceDataForMember(member, onDate)
 		summary.append(memberData)
 
@@ -470,7 +470,7 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	with open(csvName, 'w') as csvFile:
 		
 		fieldnames = ['list_name', 'constituency', 'party', \
-			'date_of_birth', 'gender', 'start_date', 'days_service']
+			'date_of_birth', 'gender', 'first_start_date', 'days_service']
 
 		writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
 		writer.writeheader()

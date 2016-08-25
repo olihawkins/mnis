@@ -523,7 +523,7 @@ class testGetSummaryDataForMembers(unittest.TestCase):
 		self.assertEqual(sd[0]['party'], 'Labour')
 		self.assertEqual(sd[0]['date_of_birth'], datetime.date(1953, 9, 27))
 		self.assertEqual(sd[0]['gender'], 'F')
-		self.assertEqual(sd[0]['start_date'], datetime.date(1987, 6, 11))
+		self.assertEqual(sd[0]['first_start_date'], datetime.date(1987, 6, 11))
 		self.assertEqual(sd[0]['days_service'], 10035)
 
 		# Check last member listed alphabetically: Daniel Zeichner
@@ -532,7 +532,7 @@ class testGetSummaryDataForMembers(unittest.TestCase):
 		self.assertEqual(sd[649]['party'], 'Labour')
 		self.assertEqual(sd[649]['date_of_birth'], datetime.date(1956, 11, 9))
 		self.assertEqual(sd[649]['gender'], 'M')
-		self.assertEqual(sd[649]['start_date'], datetime.date(2015, 5, 7))
+		self.assertEqual(sd[649]['first_start_date'], datetime.date(2015, 5, 7))
 		self.assertEqual(sd[649]['days_service'], 0)
 
 
@@ -575,7 +575,7 @@ class testSaveSummaryDataForMembers(unittest.TestCase):
 				'party', \
 				'date_of_birth', \
 				'gender', \
-				'start_date', \
+				'first_start_date', \
 				'days_service'\
 			]
 
