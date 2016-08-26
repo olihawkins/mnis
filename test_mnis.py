@@ -278,6 +278,21 @@ class testGetCommonsMembers(unittest.TestCase):
 		self.assertEqual(members, correctMembers)
 
 
+class testGetIdForMember(unittest.TestCase):
+
+	"""Tests getIdForMember and checks it returns the correct id."""
+
+	def testGetIdForMember(self):
+
+		# Check first member listed alphabetically: Diane Abbott
+		g = mnislib.getIdForMember(correctMembers[0])
+		self.assertEqual(g, '172')
+
+		# Check last member listed alphabetically: Daniel Zeichner
+		g = mnislib.getIdForMember(correctMembers[649])
+		self.assertEqual(g, '4382')
+
+
 class testGetListNameForMember(unittest.TestCase):
 
 	"""Tests getListNameForMember and checks it returns the correct name."""
@@ -356,7 +371,7 @@ class testGetPartyForMember(unittest.TestCase):
 
 	"""Tests getPartyForMember and checks it returns the correct one."""
 
-	def testPartyForMember(self):
+	def testGetPartyForMember(self):
 
 		# Set onDate to GE2015 for the latest party in the test data
 		d = datetime.date(2015, 5, 7)
@@ -517,6 +532,7 @@ class testGetSummaryDataForMembers(unittest.TestCase):
 		sd = mnislib.getSummaryDataForMembers(correctMembers, d)
 
 		# Check first member listed alphabetically: Diane Abbott
+		self.assertEqual(sd[0]['member_id'], '172')
 		self.assertEqual(sd[0]['list_name'], 'Abbott, Ms Diane')
 		self.assertEqual(sd[0]['constituency'], \
 			'Hackney North and Stoke Newington')
@@ -527,6 +543,7 @@ class testGetSummaryDataForMembers(unittest.TestCase):
 		self.assertEqual(sd[0]['days_service'], 10035)
 
 		# Check last member listed alphabetically: Daniel Zeichner
+		self.assertEqual(sd[649]['member_id'], '4382')
 		self.assertEqual(sd[649]['list_name'], 'Zeichner, Daniel')
 		self.assertEqual(sd[649]['constituency'], 'Cambridge')
 		self.assertEqual(sd[649]['party'], 'Labour')
@@ -570,6 +587,7 @@ class testSaveSummaryDataForMembers(unittest.TestCase):
 			rows = list(reader)
 
 			header = [ \
+				'member_id', \
 				'list_name', \
 				'constituency', \
 				'party', \
@@ -582,6 +600,7 @@ class testSaveSummaryDataForMembers(unittest.TestCase):
 			self.assertEqual(rows[0], header)
 
 			firstMember = [ \
+				'172', \
 				'Abbott, Ms Diane', \
 				'Hackney North and Stoke Newington', \
 				'Labour', \
@@ -594,6 +613,7 @@ class testSaveSummaryDataForMembers(unittest.TestCase):
 			self.assertEqual(rows[1], firstMember)
 
 			lastMember = [ \
+				'4382', \
 				'Zeichner, Daniel', \
 				'Cambridge', \
 				'Labour', \

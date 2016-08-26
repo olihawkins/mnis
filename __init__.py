@@ -4,6 +4,7 @@ from mnis.mnislib import \
 	getCommonsMembersBetween, \
 	getCommonsMembersAtElection, \
 	getCommonsMembers, \
+	getIdForMember, \
 	getListNameForMember, \
 	getGenderForMember, \
 	getDateOfBirthForMember, \

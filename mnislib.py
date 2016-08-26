@@ -151,11 +151,20 @@ def getCommonsMembers(urlParameters, outputParameters= \
 
 # Functions that retrieve and process data for members ----------------------
 
+def getIdForMember(member):
+
+	""" 
+	Returns the member's unique id as a string.
+	"""
+
+	return member['@Member_Id']
+
+
 def getListNameForMember(member):
 
 	""" 
-	Returns the member's list name, which has the format:
-	"surname, (title) firstname" with title being optional.
+	Returns the member's list namex, which has the format:
+	"surname, (title) firstname", with title being optional.
 	"""
 
 	return member['ListAs']
@@ -163,14 +172,14 @@ def getListNameForMember(member):
 
 def getGenderForMember(member):
 
-	""" Returns the member's gender. """
+	""" Returns the member's gender as a string: 'F' or 'M'. """
 
 	return member['Gender']
 
 
 def getDateOfBirthForMember(member):
 
-	""" Returns the member's date of birth. """
+	""" Returns the member's date of birth as a datetime.date. """
 
 	return convertMnisDatetime(member['DateOfBirth'])
 
@@ -413,6 +422,7 @@ def getSummaryDataForMembers(members, onDate):
 	for a member is determined by the onDate, which should be a datetime.date.
 	The data downloaded for each member is:
 
+	- member id
 	- listed name
 	- constituency
 	- party
@@ -436,6 +446,7 @@ def getSummaryDataForMembers(members, onDate):
 	for member in members:
 
 		memberData = {}
+		memberData['member_id']	= getIdForMember(member)	
 		memberData['list_name'] = getListNameForMember(member)
 		memberData['constituency'] = getConstituencyForMember(member, onDate)
 		memberData['party'] = getPartyForMember(member, onDate)
@@ -455,6 +466,7 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	and writes the data to file as a csv with the given filename. The data 
 	downloaded for each member is:
 
+	- member id
 	- listed name
 	- constituency
 	- party
@@ -475,7 +487,7 @@ def saveSummaryDataForMembers(summaryData, csvName):
 
 	with open(csvName, 'w') as csvFile:
 		
-		fieldnames = ['list_name', 'constituency', 'party', \
+		fieldnames = ['member_id', 'list_name', 'constituency', 'party', \
 			'date_of_birth', 'gender', 'first_start_date', 'days_service']
 
 		writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
@@ -493,6 +505,7 @@ def downloadMembers(onDate, csvName):
 	The csvName is the file into which the data will be saved. The data 
 	downloaded for each member is:
 
+	- member id
 	- listed name
 	- constituency
 	- party

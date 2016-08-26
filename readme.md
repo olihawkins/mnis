@@ -7,6 +7,7 @@ At the most basic level, the mnis library allows you to download key data on all
 
 The library's summary functions provide the following data on MPs by default:
 
+  - Member ID
   - Name
   - Constituency
   - Party
