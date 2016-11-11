@@ -181,7 +181,13 @@ def getDateOfBirthForMember(member):
 
 	""" Returns the member's date of birth as a datetime.date. """
 
-	return convertMnisDatetime(member['DateOfBirth'])
+	if isinstance(member['DateOfBirth'], str):
+		
+		return convertMnisDatetime(member['DateOfBirth'])
+
+	else:
+
+		return ''
 
 
 def getConstituencyForMember(member, onDate):
