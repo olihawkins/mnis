@@ -425,7 +425,7 @@ class testIsDateInMembership(unittest.TestCase):
 
 		# Check date after membership
 		self.assertFalse(mnislib.isDateInMembership( \
-			openMembership, datetime.date(2017, 1, 1)))
+			openMembership, datetime.date(2100, 1, 1)))
 
 
 	def testClosedMembership(self):

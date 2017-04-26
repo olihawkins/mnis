@@ -21,7 +21,7 @@ dates['1929'] = {
 }
 
 dates['1931'] = {
-	'dissolution': datetime.date(1931, 10, 8), 
+	'dissolution': datetime.date(1931, 10, 7), 
 	'election': datetime.date(1931, 10, 27)
 }
 
