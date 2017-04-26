@@ -7,7 +7,7 @@ Author: Oliver Hawkins
 About: This module provides data on the length of Parliaments and 
 dissolution periods for use with the mnis package and mnislib module.
 Dissolution dates can be found here:
-https://goo.gl/o5xV7g
+http://researchbriefings.files.parliament.uk/documents/RP15-11/RP15-11.pdf
 
 """
 
