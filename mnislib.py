@@ -491,7 +491,7 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	These are the default output parameters for getCommonsMembers functions.
 	"""
 
-	with open(csvName, 'w') as csvFile:
+	with open(csvName, 'w', newline='') as csvFile:
 		
 		fieldnames = ['member_id', 'list_name', 'constituency', 'party', \
 			'date_of_birth', 'gender', 'first_start_date', 'days_service']
