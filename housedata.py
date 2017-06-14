@@ -124,3 +124,8 @@ dates['2015'] = {
 	'dissolution': datetime.date(2015, 3, 30), 
 	'election': datetime.date(2015, 5, 7)
 }
+
+dates['2017'] = {
+	'dissolution': datetime.date(2017, 5, 3), 
+	'election': datetime.date(2017, 6, 8)
+}
