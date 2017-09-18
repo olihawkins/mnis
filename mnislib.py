@@ -139,11 +139,13 @@ def getCommonsMembers(urlParameters, outputParameters= \
 	# Make request
 	response = requests.get(url, headers=headers)
 	
-	# Get response text
-	responseText = response.text
+	# Handle byte order marker
+	response.encoding='utf-8-sig'
 	
-	# Parse JSON (cutting off the byte order marker at the start)
-	members = json.loads(responseText[1:])
+	# Parse as JSON
+	members = response.json()
+	
+	# Extract member data
 	members = members['Members']['Member']
 
 	return members
