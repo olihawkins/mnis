@@ -91,7 +91,7 @@ def getCommonsMembersAtElection(generalElectionId, outputParameters= \
 	"""
 
 	validElectionIds = [ \
-		'1983', '1987', '1992', '1997', '2001', '2005', '2010', '2015']
+		'1983', '1987', '1992', '1997', '2001', '2005', '2010', '2015', '2017']
 
 	if generalElectionId not in validElectionIds:
 		raise ElectionIdError("Invalid id in getCommonsMembersAtElection")
@@ -139,11 +139,13 @@ def getCommonsMembers(urlParameters, outputParameters= \
 	# Make request
 	response = requests.get(url, headers=headers)
 	
-	# Get response text
-	responseText = response.text
+	# Handle byte order marker
+	response.encoding='utf-8-sig'
+
+	# Parse as JSON
+	members = response.json()
 	
-	# Parse JSON (cutting off the byte order marker at the start)
-	members = json.loads(responseText[1:])
+	# Extract member data
 	members = members['Members']['Member']
 
 	return members
