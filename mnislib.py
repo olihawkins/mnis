@@ -4,8 +4,8 @@
 """
 Name: mnislib.py
 Author: Oliver Hawkins
-About: A library of ad-hoc functions for downloading data from 
-the Members Names Information Service (MNIS) at data.parliament.uk. 
+About: A library of ad-hoc functions for downloading data from
+the Members Names Information Service (MNIS) at data.parliament.uk.
 
 A description of the MNIS API can be found here:
 http://data.parliament.uk/membersdataplatform/memberquery.aspx
@@ -27,16 +27,16 @@ import mnis.housedata as housedata
 # Package Exceptions ---------------------------------------------------------
 
 class Error(Exception):
-	
-	"""Base class for exceptions in this module."""	
+
+	"""Base class for exceptions in this module."""
 	pass
 
 class ParameterError(Error):
-	"""Exception raised for errors with request parameters."""	
+	"""Exception raised for errors with request parameters."""
 	pass
 
 class ElectionIdError(ParameterError):
-	"""Exception raised for invalid election ids."""	
+	"""Exception raised for invalid election ids."""
 	pass
 
 class MembershipError(Error):
@@ -54,6 +54,9 @@ def getCurrentCommonsMembers(outputParameters= \
 	return getCommonsMembersOn(datetime.date.today(), outputParameters)
 
 
+get_current_commons_members = getCurrentCommonsMembers
+
+
 def getCommonsMembersOn(date, outputParameters= \
 	['Constituencies', 'Parties', 'HouseMemberships']):
 
@@ -61,8 +64,11 @@ def getCommonsMembersOn(date, outputParameters= \
 	Returns all Commons members on a given date, which must be
 	an instance of datetime.date.
 	"""
-	
+
 	return getCommonsMembersBetween(date, date, outputParameters)
+
+
+get_commons_members_on = getCommonsMembersOn
 
 
 def getCommonsMembersBetween(startDate, endDate, outputParameters= \
@@ -76,8 +82,11 @@ def getCommonsMembersBetween(startDate, endDate, outputParameters= \
 	s = '{0}-{1}-{2}'.format(startDate.year, startDate.month, startDate.day)
 	e = '{0}-{1}-{2}'.format(endDate.year, endDate.month, endDate.day)
 	urlParameters = 'commonsmemberbetween={0}and{1}'.format(s, e)
-	
+
 	return getCommonsMembers(urlParameters, outputParameters)
+
+
+get_commons_members_between = getCommonsMembersBetween
 
 
 def getCommonsMembersAtElection(generalElectionId, outputParameters= \
@@ -85,8 +94,8 @@ def getCommonsMembersAtElection(generalElectionId, outputParameters= \
 
 	"""
 	Returns all Commons members elected at a given general election.
-	The MNIS system holds complete data on general elections since 1983. 
-	The generalElectionId must be one of the following strings: 1983, 1987, 
+	The MNIS system holds complete data on general elections since 1983.
+	The generalElectionId must be one of the following strings: 1983, 1987,
 	1992, 1997, 2001, 2005, 2010, 2015.
 	"""
 
@@ -100,6 +109,9 @@ def getCommonsMembersAtElection(generalElectionId, outputParameters= \
 		'%20General%20Election'.format(generalElectionId)
 
 	return getCommonsMembers(urlParameters, outputParameters)
+
+
+get_commons_members_at_election = getCommonsMembersAtElection
 
 
 def buildMnisUrl(urlParameters, outputParameters):
@@ -121,55 +133,67 @@ def buildMnisUrl(urlParameters, outputParameters):
 	return url
 
 
+build_mnis_url = buildMnisUrl
+
+
 def getCommonsMembers(urlParameters, outputParameters= \
 	['Constituencies', 'Parties', 'HouseMemberships']):
 
 	"""
-	Returns all commons members with the given URL paramemters. The 
-	"house=Commons" parameter is not necessary as it is provided by 
-	buildMnisUrl. The output parameters specify what additional information 
-	about MPs the API should return. The API only allows up to three 
+	Returns all commons members with the given URL paramemters. The
+	"house=Commons" parameter is not necessary as it is provided by
+	buildMnisUrl. The output parameters specify what additional information
+	about MPs the API should return. The API only allows up to three
 	output parameters per request.
 	"""
 
-	# Set http request parameters 
+	# Set http request parameters
 	headers = {'content-type': 'application/json'}
 	url = buildMnisUrl(urlParameters, outputParameters)
 
 	# Make request
 	response = requests.get(url, headers=headers)
-	
+
 	# Handle byte order marker
 	response.encoding='utf-8-sig'
 
 	# Parse as JSON
 	members = response.json()
-	
+
 	# Extract member data
 	members = members['Members']['Member']
 
 	return members
 
 
+get_commons_members = getCommonsMembers
+
+
 # Functions that retrieve and process data for members ----------------------
 
 def getIdForMember(member):
 
-	""" 
+	"""
 	Returns the member's unique id as a string.
 	"""
 
 	return member['@Member_Id']
 
 
+get_id_for_member = getIdForMember
+
+
 def getListNameForMember(member):
 
-	""" 
+	"""
 	Returns the member's list namex, which has the format:
 	"surname, (title) firstname", with title being optional.
 	"""
 
 	return member['ListAs']
+
+
+get_list_name_for_member = getListNameForMember
 
 
 def getGenderForMember(member):
@@ -179,12 +203,15 @@ def getGenderForMember(member):
 	return member['Gender']
 
 
+get_gender_for_member = getGenderForMember
+
+
 def getDateOfBirthForMember(member):
 
 	""" Returns the member's date of birth as a datetime.date. """
 
 	if isinstance(member['DateOfBirth'], str):
-		
+
 		return convertMnisDatetime(member['DateOfBirth'])
 
 	else:
@@ -192,15 +219,18 @@ def getDateOfBirthForMember(member):
 		return ''
 
 
+get_date_of_birth_for_member = getDateOfBirthForMember
+
+
 def getConstituencyForMember(member, onDate):
 
 	"""
-	Returns a member's constituency on a given date. If the member was not an 
-	MP on the given date the function returns a string indicating the member 
+	Returns a member's constituency on a given date. If the member was not an
+	MP on the given date the function returns a string indicating the member
 	was not serving on the specified date. The member must be a member object
 	returned by one of the getCommonsMembers functions, and must contain data
-	on constituency memberships which is requested with the output parameter 
-	for 'Constituencies'. This parameter is one of the defaults for the 
+	on constituency memberships which is requested with the output parameter
+	for 'Constituencies'. This parameter is one of the defaults for the
 	getCommonsMembers functions. The onDate should be a datetime.date.
 	"""
 
@@ -220,7 +250,7 @@ def getConstituencyForMember(member, onDate):
 
 	# Otherwise the membership is accessed directly
 	else:
-		
+
 		membership = constituencyMembership
 
 		if isDateInMembership(membership, onDate):
@@ -229,15 +259,18 @@ def getConstituencyForMember(member, onDate):
 	return constituencyName
 
 
+get_constituency_for_member = getConstituencyForMember
+
+
 def getPartyForMember(member, onDate):
 
 	"""
 	Returns a member's party on a given date. If the member was not an MP on
-	the given date the function returns a string indicating the member was not 
-	serving on the specified date. The member must be a member object returned 
-	by one of the getCommonsMembers functions, and must contain data on party 
-	memberships which is requested with the output parameter for 'Parties'. 
-	This parameter is one of the defaults for the getCommonsMembers functions. 
+	the given date the function returns a string indicating the member was not
+	serving on the specified date. The member must be a member object returned
+	by one of the getCommonsMembers functions, and must contain data on party
+	memberships which is requested with the output parameter for 'Parties'.
+	This parameter is one of the defaults for the getCommonsMembers functions.
 	The onDate should be a datetime.date.
 	"""
 
@@ -257,13 +290,16 @@ def getPartyForMember(member, onDate):
 
 	# Otherwise the membership is accessed directly
 	else:
-		
+
 		membership = partyMembership
 
 		if isDateInMembership(membership, onDate):
 			partyName = membership['Name']
 
 	return partyName
+
+
+get_party_for_member = getPartyForMember
 
 
 def isDateInMembership(membership, onDate):
@@ -278,20 +314,23 @@ def isDateInMembership(membership, onDate):
 
 	# If the membership is closed set the end date to the membership end date
 	if isinstance(membership['EndDate'], str):
-		endDate = convertMnisDatetime(membership['EndDate'])	
+		endDate = convertMnisDatetime(membership['EndDate'])
 
 	return isDateInRange(onDate, startDate, endDate)
+
+
+is_date_in_membership = isDateInMembership
 
 
 def getServiceDataForMember(member, onDate):
 
 	"""
-	Returns the date a member first became an MP and the total number of days 
+	Returns the date a member first became an MP and the total number of days
 	a member has served up to the given date, excluding periods when the House
-	is in dissolution. The member must be a	member object returned by one of 
-	the getCommonsMembers functions, and must contain data on House memberships 
-	which is requested with the output parameter for 'HouseMemberships'. This 
-	parameter is one of the defaults for the getCommonsMembers functions. The 
+	is in dissolution. The member must be a	member object returned by one of
+	the getCommonsMembers functions, and must contain data on House memberships
+	which is requested with the output parameter for 'HouseMemberships'. This
+	parameter is one of the defaults for the getCommonsMembers functions. The
 	onDate should be a datetime.date.
 	"""
 
@@ -325,6 +364,9 @@ def getServiceDataForMember(member, onDate):
 	startDate = startDates[0]
 
 	return startDate, serviceDays
+
+
+get_service_data_for_member = getServiceDataForMember
 
 
 def getMembershipDays(membership, onDate, houseDates=housedata.dates):
@@ -420,13 +462,16 @@ def getMembershipDays(membership, onDate, houseDates=housedata.dates):
 	return serviceDays
 
 
+get_membership_days = getMembershipDays
+
+
 # Functions for summarising data on a list of members ------------------------
 
 def getSummaryDataForMembers(members, onDate):
 
 	"""
-	Takes a list of members, produces a set of summary data for each member 
-	in the list, and returns it as a list of dictionaries. The data returned 
+	Takes a list of members, produces a set of summary data for each member
+	in the list, and returns it as a list of dictionaries. The data returned
 	for a member is determined by the onDate, which should be a datetime.date.
 	The data downloaded for each member is:
 
@@ -441,7 +486,7 @@ def getSummaryDataForMembers(members, onDate):
 
 	In order to produce this data the members passed to the function must
 	contain outputs that are requested with output parameters for:
-	
+
 	- Constituencies
 	- Parties
 	- HouseMemberships
@@ -454,7 +499,7 @@ def getSummaryDataForMembers(members, onDate):
 	for member in members:
 
 		memberData = {}
-		memberData['member_id']	= getIdForMember(member)	
+		memberData['member_id']	= getIdForMember(member)
 		memberData['list_name'] = getListNameForMember(member)
 		memberData['constituency'] = getConstituencyForMember(member, onDate)
 		memberData['party'] = getPartyForMember(member, onDate)
@@ -467,11 +512,14 @@ def getSummaryDataForMembers(members, onDate):
 	return summary
 
 
+get_summary_data_for_members = getSummaryDataForMembers
+
+
 def saveSummaryDataForMembers(summaryData, csvName):
 
 	"""
 	Takes a list of summary data for each member from getSummaryDataForMembers
-	and writes the data to file as a csv with the given filename. The data 
+	and writes the data to file as a csv with the given filename. The data
 	downloaded for each member is:
 
 	- member id
@@ -483,9 +531,9 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	- date first became an mp
 	- number of days service
 
-	In order to produce this data the members passed to the function must 
-	contain outputs that are requested with output parameters for: 
-	
+	In order to produce this data the members passed to the function must
+	contain outputs that are requested with output parameters for:
+
 	- Constituencies
 	- Parties
 	- HouseMemberships
@@ -494,23 +542,26 @@ def saveSummaryDataForMembers(summaryData, csvName):
 	"""
 
 	with open(csvName, 'w', newline='') as csvFile:
-		
+
 		fieldnames = ['member_id', 'list_name', 'constituency', 'party', \
 			'date_of_birth', 'gender', 'first_start_date', 'days_service']
 
 		writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
 		writer.writeheader()
-		
+
 		for summary in summaryData:
 			writer.writerow(summary)
+
+
+save_summary_data_for_members = saveSummaryDataForMembers
 
 
 def downloadMembers(onDate, csvName):
 
 	"""
-	Downloads summary data on members serving in the House of Commons on a 
+	Downloads summary data on members serving in the House of Commons on a
 	given date and saves it as a csv. The onDate should be a datetime.date.
-	The csvName is the file into which the data will be saved. The data 
+	The csvName is the file into which the data will be saved. The data
 	downloaded for each member is:
 
 	- member id
@@ -523,12 +574,15 @@ def downloadMembers(onDate, csvName):
 	- number of days service
 
 	The data shows information about each members on the given date, so the
-	constituency, party, and number of days service is as at the onDate. 
+	constituency, party, and number of days service is as at the onDate.
 	"""
 
 	members = getCommonsMembersOn(onDate)
 	summaryData = getSummaryDataForMembers(members, onDate)
 	saveSummaryDataForMembers(summaryData, csvName)
+
+
+download_members = downloadMembers
 
 
 # Utility functions ----------------------------------------------------------
@@ -545,10 +599,13 @@ def convertMnisDatetime(mnisDatetime):
 	return convertedDate
 
 
+convert_mnis_datetime = convertMnisDatetime
+
+
 def isDateInRange(onDate, startDate, endDate):
 
 	"""
-	Checks whether a onDate falls between startDate an endDate. The test is 
+	Checks whether a onDate falls between startDate an endDate. The test is
 	inclusive: it passes if onDate is equal to startDate or endDate. All dates
 	are datetime.dates. An error is raised if startDate is later than endDate.
 	"""
@@ -561,3 +618,5 @@ def isDateInRange(onDate, startDate, endDate):
 	else:
 		return False
 
+
+is_date_in_range = isDateInRange
