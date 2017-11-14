@@ -13,4 +13,19 @@ from mnis.mnislib import \
 	getServiceDataForMember, \
 	getSummaryDataForMembers, \
 	saveSummaryDataForMembers, \
-	downloadMembers \
+	downloadMembers, \
+	get_current_commons_members, \
+	get_commons_members_on, \
+	get_commons_members_between, \
+	get_commons_members_at_election, \
+	get_commons_members, \
+	get_id_for_member, \
+	get_list_name_for_member, \
+	get_gender_for_member, \
+	get_date_of_birth_for_member, \
+	get_constituency_for_member, \
+	get_party_for_member, \
+	get_service_data_for_member, \
+	get_summary_data_for_members, \
+	save_summary_data_for_members, \
+	download_members \
