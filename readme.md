@@ -1,4 +1,7 @@
 # mnis
+
+_This package is no longer in active development. You may be interested in the [pdpy](https://github.com/olihawkins/pdpy) package which provides access to equivalent data through the newer Parliamentary Data Platform API._
+
 mnis is a small Python library that makes it easy to download data on UK Members of Parliament from the [Members Names Information Service][mnisapi].
 
 The MNIS API is the public interface to the UK Parliament's Members Names database, a comprehensive database of all MPs elected to Parliament since 1983. The API is flexible and powerful, but it's not very easy to use. The mnis library is a toolkit that makes it easier to download and manipulate useful data from the API.
@@ -25,14 +28,14 @@ The library is written in Python 3 and has been tested on Python 3.4 and 3.5. It
 The easiest way to install the package is with pip:
 ```sh
 pip install mnis
-``` 
+```
 Alternatively, install the package by cloning the repository into a folder called `mnis`, making sure its parent directory is in the PYTHONPATH.
 
 ### Tests
 Run `python test_mnis.py` to run the unit tests.
 
 ### Downloading data on MPs
-To download summary data on all MPs serving on a given date to a csv, pass a `datetime.date` object to the *downloadMembers* function. The constituency, party, and number of days served shown for each MP is as at the given date. 
+To download summary data on all MPs serving on a given date to a csv, pass a `datetime.date` object to the *downloadMembers* function. The constituency, party, and number of days served shown for each MP is as at the given date.
 ```python
 import mnis
 import datetime
@@ -91,9 +94,9 @@ print(sd[103]['list_name'], '-', sd[103]['party'])
 
 ### API gotchas
 
-The Members Names database is an administrative system as well as a record of historical data, and there are some inconsistencies in recording practices to look out for. In particular, in some cases MPs are listed as serving up to the date of the general election at which they were defeated or stepped down, while in others they are listed as serving up to the date of dissolution before the general election at which they were defeated or stepped down. 
+The Members Names database is an administrative system as well as a record of historical data, and there are some inconsistencies in recording practices to look out for. In particular, in some cases MPs are listed as serving up to the date of the general election at which they were defeated or stepped down, while in others they are listed as serving up to the date of dissolution before the general election at which they were defeated or stepped down.
 
-This does not affect the calculation of the number of days served by a member, which excludes any period of dissolution irrespective of how the memberships are recorded. However, it does affect the MPs returned by date-based API requests. 
+This does not affect the calculation of the number of days served by a member, which excludes any period of dissolution irrespective of how the memberships are recorded. However, it does affect the MPs returned by date-based API requests.
 
 For example, requesting all members serving on the date of the 2010 General Election with *getCommonsMembersOn* returns the 650 MPs elected on that date *and* the 225 MPs who were either defeated or stood down at that election. This is not the case for the 2015 General Election: a date-based request for members serving on the date of that election returns just those elected on that day.
 
@@ -109,4 +112,3 @@ A less simple solution, which provides the most fine-grained control, is to requ
 
 [mnisapi]: <http://data.parliament.uk/membersdataplatform/memberquery.aspx>
 [requests]: <http://docs.python-requests.org/en/master/>
-

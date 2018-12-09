@@ -155,7 +155,7 @@ def getCommonsMembers(urlParameters, outputParameters= \
 	response = requests.get(url, headers=headers)
 
 	# Handle byte order marker
-	response.encoding='utf-8-sig'
+	response.encoding = 'utf-8-sig'
 
 	# Parse as JSON
 	members = response.json()
