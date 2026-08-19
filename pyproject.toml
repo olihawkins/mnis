@@ -1,0 +1,25 @@
+[project]
+name = "mnis"
+version = "2.0.0"
+description = "A Python package for downloading data from the Parliamentary Members Names Information Service"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "LICENSE-clmnis"]
+authors = [
+    { name = "Oliver Hawkins", email = "oli@olihawkins.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "polars>=1.43.2",
+    "requests>=2.34.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "build>=1.5.0",
+    "ipython>=9.16.1",
+]
