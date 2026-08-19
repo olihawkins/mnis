@@ -9,7 +9,7 @@ The MNIS API is the public interface to the UK Parliament's Members Names Inform
 
 ## Version 2
 
-Version 2 is a complete rewrite of the previous Python `mnis` package. It is **not** backwards compatible with the previous version: it provides much broader functionality and presents a completely different API. It is essentially a Python port of the House of Commons Library's R package (clmnis)[https://github.com/houseofcommonslibrary/clmnis].
+Version 2 is a complete rewrite of the previous Python `mnis` package. It is **not** backwards compatible with the previous version: it provides much broader functionality and presents a completely different API. It is essentially a Python port of the House of Commons Library's R package [clmnis](https://github.com/houseofcommonslibrary/clmnis).
 
 ## Installation
 
