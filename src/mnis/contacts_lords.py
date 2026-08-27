@@ -2,7 +2,7 @@
 
 import datetime
 
-import polars as pl
+from polars import DataFrame
 
 from mnis.contacts import fetch_members_blogs
 from mnis.contacts import fetch_members_email_addresses
@@ -22,7 +22,7 @@ Date = str | datetime.date | None
 def fetch_lords_office_addresses(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch office addresses for Lords.
 
     fetch_lords_office_addresses fetches data from the Members Names
@@ -65,7 +65,7 @@ def fetch_lords_office_addresses(
 def fetch_lords_email_addresses(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch email addresses for Lords.
 
     fetch_lords_email_addresses fetches data from the Members Names
@@ -108,7 +108,7 @@ def fetch_lords_email_addresses(
 def fetch_lords_phone_numbers(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch phone numbers for Lords.
 
     fetch_lords_phone_numbers fetches data from the Members Names platform
@@ -151,7 +151,7 @@ def fetch_lords_phone_numbers(
 def fetch_lords_fax_numbers(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch fax numbers for Lords.
 
     fetch_lords_fax_numbers fetches data from the Members Names platform on
@@ -194,7 +194,7 @@ def fetch_lords_fax_numbers(
 def fetch_lords_websites(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch websites for Lords.
 
     fetch_lords_websites fetches data from the Members Names platform on
@@ -237,7 +237,7 @@ def fetch_lords_websites(
 def fetch_lords_blogs(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch blogs for Lords.
 
     fetch_lords_blogs fetches data from the Members Names platform on blogs
@@ -279,7 +279,7 @@ def fetch_lords_blogs(
 def fetch_lords_twitter(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Twitter accounts for Lords.
 
     fetch_lords_twitter fetches data from the Members Names platform on
@@ -322,7 +322,7 @@ def fetch_lords_twitter(
 def fetch_lords_instagram(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Instagram accounts for Lords.
 
     fetch_lords_instagram fetches data from the Members Names platform on
@@ -365,7 +365,7 @@ def fetch_lords_instagram(
 def fetch_lords_facebook(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Facebook accounts for Lords.
 
     fetch_lords_facebook fetches data from the Members Names platform on

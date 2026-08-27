@@ -1,9 +1,12 @@
 """Functions for downloading and analysing data on Lords"""
 
-import datetime
+# Imports ---------------------------------------------------------------------
 
+import datetime
 import polars as pl
 import polars.selectors as cs
+
+from polars import DataFrame
 
 from mnis.combine import combine_party_memberships
 from mnis.constants import CACHE_LORDS_ADDRESSES_RAW
@@ -29,13 +32,17 @@ from mnis.raw_lords import fetch_lords_parliamentary_roles_raw
 from mnis.raw_lords import fetch_lords_party_memberships_raw
 from mnis.raw_lords import fetch_lords_raw
 
+# Constants -------------------------------------------------------------------
+
 Date = str | datetime.date | None
+
+# Fetch functions -------------------------------------------------------------
 
 
 def fetch_lords(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch key details for all Lords.
 
     fetch_lords fetches data from the Members Names platform showing key
@@ -97,7 +104,7 @@ def fetch_lords(
 def fetch_lords_memberships(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Lords memberships for all Lords.
 
     fetch_lords_memberships fetches data from the Members Names platform
@@ -166,7 +173,7 @@ def fetch_lords_party_memberships(
         to_date: Date = None,
         on_date: Date = None,
         while_lord: bool = True,
-        collapse: bool = False) -> pl.DataFrame:
+        collapse: bool = False) -> DataFrame:
     """Fetch party memberships for all Lords.
 
     fetch_lords_party_memberships fetches data from the Members Names
@@ -266,7 +273,7 @@ def fetch_lords_party_memberships(
 def fetch_lords_other_parliaments(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch other parliament memberships for all Lords.
 
     fetch_lords_other_parliaments fetches data from the Members Names
@@ -330,7 +337,7 @@ def fetch_lords_other_parliaments(
 def fetch_lords_contested_elections(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch contested elections for all Lords.
 
     fetch_lords_contested_elections fetches data from the Members Names
@@ -395,7 +402,7 @@ def fetch_lords_government_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_lord: bool = True) -> pl.DataFrame:
+        while_lord: bool = True) -> DataFrame:
     """Fetch government roles for all Lords.
 
     fetch_lords_government_roles fetches data from the Members Names
@@ -480,7 +487,7 @@ def fetch_lords_opposition_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_lord: bool = True) -> pl.DataFrame:
+        while_lord: bool = True) -> DataFrame:
     """Fetch opposition roles for all Lords.
 
     fetch_lords_opposition_roles fetches data from the Members Names
@@ -565,7 +572,7 @@ def fetch_lords_parliamentary_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_lord: bool = True) -> pl.DataFrame:
+        while_lord: bool = True) -> DataFrame:
     """Fetch parliamentary roles for all Lords.
 
     fetch_lords_parliamentary_roles fetches data from the Members Names
@@ -650,7 +657,7 @@ def fetch_lords_parliamentary_roles(
 def fetch_lords_maiden_speeches(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch maiden speeches for all Lords.
 
     fetch_lords_maiden_speeches fetches data from the Members Names
@@ -710,7 +717,7 @@ def fetch_lords_maiden_speeches(
         .with_columns(cs.string().str.strip_chars()))
 
 
-def fetch_lords_addresses() -> pl.DataFrame:
+def fetch_lords_addresses() -> DataFrame:
     """Fetch addresses for all Lords.
 
     fetch_lords_addresses fetches data from the Members Names platform

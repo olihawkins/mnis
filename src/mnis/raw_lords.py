@@ -1,6 +1,10 @@
 """Functions for downloading raw query data"""
 
+# Imports ---------------------------------------------------------------------
+
 import polars as pl
+
+from polars import DataFrame
 
 from mnis.constants import CACHE_LORDS_ADDRESSES_RAW
 from mnis.constants import CACHE_LORDS_CONTESTED_ELECTIONS_RAW
@@ -23,7 +27,7 @@ from mnis.utility import process_missing_values
 # Raw Lord queries ------------------------------------------------------------
 
 
-def fetch_lords_raw() -> pl.DataFrame:
+def fetch_lords_raw() -> DataFrame:
     """Fetch key details: Lords."""
 
     # Fetch raw
@@ -56,7 +60,7 @@ def fetch_lords_raw() -> pl.DataFrame:
     return lords
 
 
-def fetch_lords_memberships_raw() -> pl.DataFrame:
+def fetch_lords_memberships_raw() -> DataFrame:
     """Fetch memberships: Lords."""
 
     # Fetch raw
@@ -98,7 +102,7 @@ def fetch_lords_memberships_raw() -> pl.DataFrame:
     return memberships
 
 
-def fetch_lords_party_memberships_raw() -> pl.DataFrame:
+def fetch_lords_party_memberships_raw() -> DataFrame:
     """Fetch party memberships: Lords."""
 
     # Fetch raw party membership data
@@ -146,7 +150,7 @@ def fetch_lords_party_memberships_raw() -> pl.DataFrame:
     return memberships
 
 
-def fetch_lords_other_parliaments_raw() -> pl.DataFrame:
+def fetch_lords_other_parliaments_raw() -> DataFrame:
     """Fetch other parliaments: Lords."""
 
     # Fetch raw
@@ -196,7 +200,7 @@ def fetch_lords_other_parliaments_raw() -> pl.DataFrame:
     return other_parliaments
 
 
-def fetch_lords_contested_elections_raw() -> pl.DataFrame:
+def fetch_lords_contested_elections_raw() -> DataFrame:
     """Fetch contested elections: Lords."""
 
     # Fetch raw
@@ -247,7 +251,7 @@ def fetch_lords_contested_elections_raw() -> pl.DataFrame:
     return contested_elections
 
 
-def fetch_lords_government_roles_raw() -> pl.DataFrame:
+def fetch_lords_government_roles_raw() -> DataFrame:
     """Fetch government roles: Lords."""
 
     # Fetch raw
@@ -288,7 +292,7 @@ def fetch_lords_government_roles_raw() -> pl.DataFrame:
     return government_roles
 
 
-def fetch_lords_opposition_roles_raw() -> pl.DataFrame:
+def fetch_lords_opposition_roles_raw() -> DataFrame:
     """Fetch opposition roles: Lords."""
 
     # Fetch raw
@@ -329,7 +333,7 @@ def fetch_lords_opposition_roles_raw() -> pl.DataFrame:
     return opposition_roles
 
 
-def fetch_lords_parliamentary_roles_raw() -> pl.DataFrame:
+def fetch_lords_parliamentary_roles_raw() -> DataFrame:
     """Fetch parliamentary roles: Lords."""
 
     # Fetch raw
@@ -370,7 +374,7 @@ def fetch_lords_parliamentary_roles_raw() -> pl.DataFrame:
     return parliamentary_roles
 
 
-def fetch_lords_maiden_speeches_raw() -> pl.DataFrame:
+def fetch_lords_maiden_speeches_raw() -> DataFrame:
     """Fetch maiden speeches: Lords."""
 
     # Fetch raw
@@ -410,7 +414,7 @@ def fetch_lords_maiden_speeches_raw() -> pl.DataFrame:
     return maiden_speeches
 
 
-def fetch_lords_addresses_raw() -> pl.DataFrame:
+def fetch_lords_addresses_raw() -> DataFrame:
     """Fetch addresses: Lords."""
 
     # Fetch raw

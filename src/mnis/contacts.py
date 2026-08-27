@@ -1,12 +1,19 @@
 """Functions for extracting contact details from the Members addresses
 table"""
 
-import datetime
-from typing import Callable
+# Imports ---------------------------------------------------------------------
 
+import datetime
 import polars as pl
 
+from polars import DataFrame
+from typing import Callable
+
+# Types -----------------------------------------------------------------------
+
 Date = str | datetime.date | None
+
+# Extract usernames -----------------------------------------------------------
 
 
 def extract_username(url: str) -> str:
@@ -32,10 +39,9 @@ def extract_username(url: str) -> str:
 def fetch_members_office_addresses(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch office addresses for Members."""
 
     # Fetch members for the given dates
@@ -73,10 +79,9 @@ def fetch_members_office_addresses(
 def fetch_members_email_addresses(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch email addresses for Members."""
 
     # Fetch members for the given dates
@@ -108,10 +113,9 @@ def fetch_members_email_addresses(
 def fetch_members_phone_numbers(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch phone numbers for Members."""
 
     # Fetch members for the given dates
@@ -143,10 +147,9 @@ def fetch_members_phone_numbers(
 def fetch_members_fax_numbers(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch fax numbers for Members."""
 
     # Fetch members for the given dates
@@ -178,10 +181,9 @@ def fetch_members_fax_numbers(
 def fetch_members_websites(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch websites for Members."""
 
     # Fetch members for the given dates
@@ -213,10 +215,9 @@ def fetch_members_websites(
 def fetch_members_blogs(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch blogs for Members."""
 
     # Fetch members for the given dates
@@ -248,10 +249,10 @@ def fetch_members_blogs(
 def fetch_members_twitter(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
+        
     """Fetch Twitter accounts for Members."""
 
     # Fetch members for the given dates
@@ -289,10 +290,9 @@ def fetch_members_twitter(
 def fetch_members_instagram(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Instagram accounts for Members."""
 
     # Fetch members for the given dates
@@ -330,10 +330,9 @@ def fetch_members_instagram(
 def fetch_members_facebook(
         fetch_members: Callable,
         fetch_addresses: Callable,
-        address_func: Callable | None = None,
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Facebook accounts for Members."""
 
     # Fetch members for the given dates

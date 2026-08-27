@@ -2,7 +2,7 @@
 
 import datetime
 
-import polars as pl
+from polars import DataFrame
 
 from mnis.contacts import fetch_members_blogs
 from mnis.contacts import fetch_members_email_addresses
@@ -22,7 +22,7 @@ Date = str | datetime.date | None
 def fetch_mps_office_addresses(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch office addresses for MPs.
 
     fetch_mps_office_addresses fetches data from the Members Names platform
@@ -65,7 +65,7 @@ def fetch_mps_office_addresses(
 def fetch_mps_email_addresses(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch email addresses for MPs.
 
     fetch_mps_email_addresses fetches data from the Members Names platform
@@ -108,7 +108,7 @@ def fetch_mps_email_addresses(
 def fetch_mps_phone_numbers(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch phone numbers for MPs.
 
     fetch_mps_phone_numbers fetches data from the Members Names platform on
@@ -151,7 +151,7 @@ def fetch_mps_phone_numbers(
 def fetch_mps_fax_numbers(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch fax numbers for MPs.
 
     fetch_mps_fax_numbers fetches data from the Members Names platform on
@@ -194,7 +194,7 @@ def fetch_mps_fax_numbers(
 def fetch_mps_websites(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch websites for MPs.
 
     fetch_mps_websites fetches data from the Members Names platform on
@@ -236,7 +236,7 @@ def fetch_mps_websites(
 def fetch_mps_blogs(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch blogs for MPs.
 
     fetch_mps_blogs fetches data from the Members Names platform on blogs
@@ -278,7 +278,7 @@ def fetch_mps_blogs(
 def fetch_mps_twitter(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Twitter accounts for MPs.
 
     fetch_mps_twitter fetches data from the Members Names platform on
@@ -321,7 +321,7 @@ def fetch_mps_twitter(
 def fetch_mps_instagram(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Instagram accounts for MPs.
 
     fetch_mps_instagram fetches data from the Members Names platform on
@@ -364,7 +364,7 @@ def fetch_mps_instagram(
 def fetch_mps_facebook(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Facebook accounts for MPs.
 
     fetch_mps_facebook fetches data from the Members Names platform on

@@ -2,10 +2,14 @@
 
 import polars as pl
 
+from polars import Expr
+from polars import DataFrame
+from polars import Series
+
 # Combine party memberships ---------------------------------------------------
 
 
-def combine_party_memberships(pm: pl.DataFrame) -> pl.DataFrame:
+def combine_party_memberships(pm: DataFrame) -> DataFrame:
     """Combine consecutive records in a dataframe of party memberships.
 
     combine_party_memberships takes a dataframe of party memberships and
@@ -57,7 +61,7 @@ def combine_party_memberships(pm: pl.DataFrame) -> pl.DataFrame:
         per_par_mem_ids.append(f"{per_par_id}-{group_id}")
 
     pm = pm.with_columns(
-        pl.Series("per_par_mem_id", per_par_mem_ids, dtype=pl.String))
+        Series("per_par_mem_id", per_par_mem_ids, dtype=pl.String))
 
     # Group by person, party and consecutive membership, then take the
     # earliest start date and latest end date. As in R, the minimum and
@@ -71,7 +75,7 @@ def combine_party_memberships(pm: pl.DataFrame) -> pl.DataFrame:
         "party_name",
         "per_par_mem_id"]
 
-    def min_max_with_nulls(column: str, agg: str) -> pl.Expr:
+    def min_max_with_nulls(column: str, agg: str) -> Expr:
         agg_expr = (
             pl.col(column).min() if agg == "min" else pl.col(column).max())
         return (

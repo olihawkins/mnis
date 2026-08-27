@@ -1,9 +1,12 @@
 """Functions for downloading and analysing data on MPs"""
 
-import datetime
+# Imports ---------------------------------------------------------------------
 
+import datetime
 import polars as pl
 import polars.selectors as cs
+
+from polars import DataFrame
 
 from mnis.combine import combine_party_memberships
 from mnis.constants import CACHE_COMMONS_MEMBERSHIPS_RAW
@@ -30,13 +33,17 @@ from mnis.raw_mps import fetch_mps_parliamentary_roles_raw
 from mnis.raw_mps import fetch_mps_party_memberships_raw
 from mnis.raw_mps import fetch_mps_raw
 
+# Constants -------------------------------------------------------------------
+
 Date = str | datetime.date | None
+
+# Fetch functions -------------------------------------------------------------
 
 
 def fetch_mps(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch key details for all MPs.
 
     fetch_mps fetches data from the Members Names platform showing key
@@ -97,7 +104,7 @@ def fetch_mps(
 def fetch_commons_memberships(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch Commons memberships for all MPs.
 
     fetch_commons_memberships fetches data from the Members Names platform
@@ -184,7 +191,7 @@ def fetch_mps_party_memberships(
         to_date: Date = None,
         on_date: Date = None,
         while_mp: bool = True,
-        collapse: bool = False) -> pl.DataFrame:
+        collapse: bool = False) -> DataFrame:
     """Fetch party memberships for all MPs.
 
     fetch_mps_party_memberships fetches data from the Members Names platform
@@ -284,7 +291,7 @@ def fetch_mps_party_memberships(
 def fetch_mps_other_parliaments(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch other parliament memberships for all MPs.
 
     fetch_mps_other_parliaments fetches data from the Members Names platform
@@ -348,7 +355,7 @@ def fetch_mps_other_parliaments(
 def fetch_mps_contested_elections(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch contested elections for all MPs.
 
     fetch_mps_contested_elections fetches data from the Members Names
@@ -413,7 +420,7 @@ def fetch_mps_government_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_mp: bool = True) -> pl.DataFrame:
+        while_mp: bool = True) -> DataFrame:
     """Fetch government roles for all MPs.
 
     fetch_mps_government_roles fetches data from the Members Names platform
@@ -498,7 +505,7 @@ def fetch_mps_opposition_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_mp: bool = True) -> pl.DataFrame:
+        while_mp: bool = True) -> DataFrame:
     """Fetch opposition roles for all MPs.
 
     fetch_mps_opposition_roles fetches data from the Members Names platform
@@ -583,7 +590,7 @@ def fetch_mps_parliamentary_roles(
         from_date: Date = None,
         to_date: Date = None,
         on_date: Date = None,
-        while_mp: bool = True) -> pl.DataFrame:
+        while_mp: bool = True) -> DataFrame:
     """Fetch parliamentary roles for all MPs.
 
     fetch_mps_parliamentary_roles fetches data from the Members Names
@@ -667,7 +674,7 @@ def fetch_mps_parliamentary_roles(
 def fetch_mps_maiden_speeches(
         from_date: Date = None,
         to_date: Date = None,
-        on_date: Date = None) -> pl.DataFrame:
+        on_date: Date = None) -> DataFrame:
     """Fetch maiden speeches for all MPs.
 
     fetch_mps_maiden_speeches fetches data from the Members Names platform
@@ -727,7 +734,7 @@ def fetch_mps_maiden_speeches(
         .with_columns(cs.string().str.strip_chars()))
 
 
-def fetch_mps_addresses() -> pl.DataFrame:
+def fetch_mps_addresses() -> DataFrame:
     """Fetch addresses for all MPs.
 
     fetch_mps_addresses fetches data from the Members Names platform showing

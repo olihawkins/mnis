@@ -1,8 +1,13 @@
 """Elections data functions"""
 
-import datetime
+# Imports ---------------------------------------------------------------------
 
+import datetime
 import polars as pl
+
+from polars import DataFrame
+
+# Constants -------------------------------------------------------------------
 
 ELECTION_DATES = [
     ("1929", "1929-05-10", "1929-05-30"),
@@ -31,8 +36,9 @@ ELECTION_DATES = [
     ("2019", "2019-11-06", "2019-12-12"),
     ("2024", "2024-05-30", "2024-07-04")]
 
+# Get general elections -------------------------------------------------------
 
-def get_general_elections() -> pl.DataFrame:
+def get_general_elections() -> DataFrame:
     """Return the dates of UK general elections since 1929 as a dataframe.
 
     get_general_elections returns the dates of UK general elections since
@@ -44,7 +50,7 @@ def get_general_elections() -> pl.DataFrame:
 
     :return: A dataframe with data on general elections.
     """
-    return pl.DataFrame(
+    return DataFrame(
         {
             "name": [e[0] for e in ELECTION_DATES],
             "dissolution": [
@@ -57,6 +63,7 @@ def get_general_elections() -> pl.DataFrame:
             "dissolution": pl.Date,
             "election": pl.Date})
 
+# Get general elections list --------------------------------------------------
 
 def get_general_elections_list() -> dict:
     """Return the dates of UK general elections since 1929 as a dict.

@@ -1,8 +1,11 @@
 """Filter functions"""
 
-import datetime
+# Imports ---------------------------------------------------------------------
 
+import datetime
 import polars as pl
+
+from polars import DataFrame
 
 from mnis.errors import date_format_error
 from mnis.errors import missing_column_error
@@ -12,11 +15,11 @@ from mnis.utility import parse_date
 
 
 def filter_dates(
-        df: pl.DataFrame,
+        df: DataFrame,
         start_col: str,
         end_col: str,
         from_date: str | datetime.date | None = None,
-        to_date: str | datetime.date | None = None) -> pl.DataFrame:
+        to_date: str | datetime.date | None = None) -> DataFrame:
     """Filter a dataframe of data based on the given from and to dates.
 
     filter_dates takes a dataframe which contains data on a time bound
@@ -108,14 +111,14 @@ def handle_date(d: str | datetime.date | None) -> datetime.date | None:
 
 
 def filter_memberships(
-        tm: pl.DataFrame,
-        fm: pl.DataFrame,
+        tm: DataFrame,
+        fm: DataFrame,
         tm_id_col: str,
         tm_start_col: str,
         tm_end_col: str,
         fm_start_col: str,
         fm_end_col: str,
-        join_col: str) -> pl.DataFrame:
+        join_col: str) -> DataFrame:
     """Filter a dataframe of memberships to include only the rows whose
     period of membership intersects with those in another dataframe of
     memberships.

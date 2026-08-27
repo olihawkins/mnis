@@ -1,12 +1,15 @@
 """Utility functions used across the package"""
 
+# Imports ---------------------------------------------------------------------
+
 import datetime
 import json
 import math
-import re
-
 import polars as pl
+import re
 import requests
+
+from polars import DataFrame
 
 from mnis.constants import MNIS_API
 from mnis.errors import check_query_status
@@ -80,7 +83,7 @@ def process_member_age(
 def extract_data_output(
         data_output: list[dict],
         col_section_a: str,
-        col_section_b: str) -> pl.DataFrame:
+        col_section_b: str) -> DataFrame:
     """Extract data output.
 
     Takes the list of member data returned from the API and extracts the
@@ -109,7 +112,7 @@ def extract_data_output(
     return pl.from_dicts(rows, schema=schema)
 
 
-def process_mps_output(output_table: pl.DataFrame) -> pl.DataFrame:
+def process_mps_output(output_table: DataFrame) -> DataFrame:
     """Combine basic MP data with output table."""
 
     from mnis.raw_mps import fetch_mps_raw
@@ -129,7 +132,7 @@ def process_mps_output(output_table: pl.DataFrame) -> pl.DataFrame:
     return output.select(first_columns + other_columns)
 
 
-def process_lords_output(output_table: pl.DataFrame) -> pl.DataFrame:
+def process_lords_output(output_table: DataFrame) -> DataFrame:
     """Combine basic Lords data with output table."""
 
     from mnis.raw_lords import fetch_lords_raw
@@ -175,7 +178,7 @@ def parse_date(date_str: str) -> datetime.date:
         raise ValueError(date_format_error(date_str))
 
 
-def convert_date_column(df: pl.DataFrame, column: str) -> pl.DataFrame:
+def convert_date_column(df: DataFrame, column: str) -> DataFrame:
     """Convert a column of date strings to dates.
 
     Equivalent to calling as.Date on a character column in R: the date is
