@@ -16,21 +16,18 @@ Date = str | datetime.date | None
 # Extract usernames -----------------------------------------------------------
 
 
-def extract_username(url: str) -> str:
+def extract_username(url: str) -> str | None:
     """Extract a username from a social media url.
 
-    The username is the last or penultimate token in the url, ignoring
-    query strings.
+    The username is the last token in the url that is not empty, ignoring
+    query strings. A url with no such token, such as an empty string, has
+    no username and returns None.
     """
-    url_parts = url.split("/")
-    last_token = url_parts[-1]
-    if last_token == "" or last_token.startswith("?"):
-        username = url_parts[-2]
-    elif "?" in last_token:
-        username = last_token.split("?")[0]
-    else:
-        username = last_token
-    return username
+    tokens = [token.split("?")[0] for token in url.split("/")]
+    tokens = [token for token in tokens if token != ""]
+    if len(tokens) == 0:
+        return None
+    return tokens[-1]
 
 
 # Office addresses ------------------------------------------------------------
@@ -207,40 +204,6 @@ def fetch_members_websites(
 
     # Filter websites for the given members
     return websites.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
-
-
-# Blogs -----------------------------------------------------------------------
-
-
-def fetch_members_blogs(
-        fetch_members: Callable,
-        fetch_addresses: Callable,
-        from_date: Date = None,
-        to_date: Date = None,
-        on_date: Date = None) -> DataFrame:
-    """Fetch blogs for Members."""
-
-    # Fetch members for the given dates
-    members = fetch_members(
-        from_date=from_date,
-        to_date=to_date,
-        on_date=on_date).select("mnis_id")
-
-    # Fetch blogs for members
-    blogs = (
-        fetch_addresses()
-        .filter(pl.col("address_type_mnis_id") == "10")
-        .filter(pl.col("address_1").is_not_null())
-        .select(
-            "mnis_id",
-            "given_name",
-            "family_name",
-            "display_name",
-            "address_type",
-            pl.col("address_1").alias("url")))
-
-    # Filter blogs for the given members
-    return blogs.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
 
 
 # Twitter ---------------------------------------------------------------------

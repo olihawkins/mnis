@@ -8,6 +8,7 @@ import polars.selectors as cs
 
 from polars import DataFrame
 
+from mnis.cache import cache
 from mnis.combine import combine_party_memberships
 from mnis.constants import CACHE_LORDS_ADDRESSES_RAW
 from mnis.constants import CACHE_LORDS_CONTESTED_ELECTIONS_RAW
@@ -18,7 +19,7 @@ from mnis.constants import CACHE_LORDS_OPPOSITION_ROLES_RAW
 from mnis.constants import CACHE_LORDS_OTHER_PARLIAMENTS_RAW
 from mnis.constants import CACHE_LORDS_PARLIAMENTARY_ROLES_RAW
 from mnis.constants import CACHE_LORDS_PARTY_MEMBERSHIPS_RAW
-from mnis.constants import cache
+from mnis.constants import CACHE_LORDS_RAW
 from mnis.filters import filter_dates
 from mnis.filters import filter_memberships
 from mnis.raw_lords import fetch_lords_addresses_raw
@@ -79,8 +80,11 @@ def fetch_lords(
         from_date = on_date
         to_date = on_date
 
-    # Fetch key details
-    lords = fetch_lords_raw()
+    # Check cache
+    if CACHE_LORDS_RAW not in cache:
+        lords = fetch_lords_raw()
+    else:
+        lords = cache[CACHE_LORDS_RAW]
 
     # Filter on dates if requested
     if from_date is not None or to_date is not None:
@@ -249,7 +253,6 @@ def fetch_lords_party_memberships(
         party_memberships = filter_memberships(
             tm=party_memberships,
             fm=lords_memberships,
-            tm_id_col="party_mnis_id",
             tm_start_col="party_membership_start_date",
             tm_end_col="party_membership_end_date",
             fm_start_col="seat_incumbency_start_date",
@@ -466,7 +469,6 @@ def fetch_lords_government_roles(
         government_roles = filter_memberships(
             tm=government_roles,
             fm=lords_memberships,
-            tm_id_col="government_role_mnis_id",
             tm_start_col="government_role_incumbency_start_date",
             tm_end_col="government_role_incumbency_end_date",
             fm_start_col="seat_incumbency_start_date",
@@ -551,7 +553,6 @@ def fetch_lords_opposition_roles(
         opposition_roles = filter_memberships(
             tm=opposition_roles,
             fm=lords_memberships,
-            tm_id_col="opposition_role_mnis_id",
             tm_start_col="opposition_role_incumbency_start_date",
             tm_end_col="opposition_role_incumbency_end_date",
             fm_start_col="seat_incumbency_start_date",
@@ -637,7 +638,6 @@ def fetch_lords_parliamentary_roles(
         parliamentary_roles = filter_memberships(
             tm=parliamentary_roles,
             fm=lords_memberships,
-            tm_id_col="parliamentary_role_mnis_id",
             tm_start_col="parliamentary_role_incumbency_start_date",
             tm_end_col="parliamentary_role_incumbency_end_date",
             fm_start_col="seat_incumbency_start_date",

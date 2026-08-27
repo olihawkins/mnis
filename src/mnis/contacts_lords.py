@@ -4,7 +4,6 @@ import datetime
 
 from polars import DataFrame
 
-from mnis.contacts import fetch_members_blogs
 from mnis.contacts import fetch_members_email_addresses
 from mnis.contacts import fetch_members_fax_numbers
 from mnis.contacts import fetch_members_facebook
@@ -227,48 +226,6 @@ def fetch_lords_websites(
         combination of Lord and website.
     """
     return fetch_members_websites(
-        fetch_lords,
-        fetch_lords_addresses,
-        from_date=from_date,
-        to_date=to_date,
-        on_date=on_date)
-
-
-def fetch_lords_blogs(
-        from_date: Date = None,
-        to_date: Date = None,
-        on_date: Date = None) -> DataFrame:
-    """Fetch blogs for Lords.
-
-    fetch_lords_blogs fetches data from the Members Names platform on blogs
-    for each Lord, with one row per combination of Lord and blog.
-
-    The from_date and to_date arguments can be used to filter the Lords
-    based on the dates of their Lords memberships. The on_date argument is
-    a convenience that sets the from_date and to_date to the same given
-    date. The on_date has priority: if the on_date is set, the from_date
-    and to_date are ignored.
-
-    The filtering is inclusive: a Lord is returned if any part of one of
-    their Lords memberships falls within the period specified with the from
-    and to dates.
-
-    :param from_date: A string or date representing a date. If a string is
-        used it should specify the date in ISO 8601 date format e.g.
-        '2000-12-31'. The default value is None, which means no records are
-        excluded on the basis of the from_date.
-    :param to_date: A string or date representing a date. If a string is
-        used it should specify the date in ISO 8601 date format e.g.
-        '2000-12-31'. The default value is None, which means no records are
-        excluded on the basis of the to_date.
-    :param on_date: A string or date representing a date. If a string is
-        used it should specify the date in ISO 8601 date format e.g.
-        '2000-12-31'. The default value is None, which means no records are
-        excluded on the basis of the on_date.
-    :return: A dataframe of known blogs for each Lord, with one row per
-        combination of Lord and blog.
-    """
-    return fetch_members_blogs(
         fetch_lords,
         fetch_lords_addresses,
         from_date=from_date,

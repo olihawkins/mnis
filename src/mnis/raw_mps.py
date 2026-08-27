@@ -4,6 +4,7 @@ import polars as pl
 
 from polars import DataFrame
 
+from mnis.cache import cache
 from mnis.constants import CACHE_COMMONS_MEMBERSHIPS_RAW
 from mnis.constants import CACHE_COMMONS_PARTY_MEMBERSHIPS_RAW
 from mnis.constants import CACHE_MPS_ADDRESSES_RAW
@@ -13,18 +14,21 @@ from mnis.constants import CACHE_MPS_MAIDEN_SPEECHES_RAW
 from mnis.constants import CACHE_MPS_OPPOSITION_ROLES_RAW
 from mnis.constants import CACHE_MPS_OTHER_PARLIAMENTS_RAW
 from mnis.constants import CACHE_MPS_PARLIAMENTARY_ROLES_RAW
+from mnis.constants import CACHE_MPS_RAW
+from mnis.constants import COLUMNS_ADDRESSES
+from mnis.constants import COLUMNS_COMMONS_MEMBERSHIPS
+from mnis.constants import COLUMNS_CONTESTED_ELECTIONS
+from mnis.constants import COLUMNS_MAIDEN_SPEECHES
+from mnis.constants import COLUMNS_MPS
+from mnis.constants import COLUMNS_OTHER_PARLIAMENTS
+from mnis.constants import COLUMNS_PARTY_MEMBERSHIPS
+from mnis.constants import COLUMNS_POSTS
 from mnis.constants import HOUSE_COMMONS
-from mnis.constants import cache
 from mnis import utility
 from mnis.utility import convert_date_column
 from mnis.utility import extract_data_output
-from mnis.utility import process_missing_values
 from mnis.utility import process_mps_output
-
-
-def scalar(value: object) -> object:
-    """Convert a raw JSON value to a scalar, mapping nil objects to None."""
-    return None if isinstance(value, dict) else value
+from mnis.utility import scalar
 
 
 # Raw MP queries --------------------------------------------------------------
@@ -49,16 +53,21 @@ def fetch_mps_raw() -> DataFrame:
             "current_status_reason": scalar(
                 member["CurrentStatus"].get("Reason")),
             "gender": scalar(member.get("Gender")),
-            "date_of_death": member.get("DateOfDeath"),
+            "date_of_death": scalar(member.get("DateOfDeath")),
         }
         for member in mps_raw
     ]
 
-    # Tidy and return
-    rows = process_missing_values(rows, "date_of_death")
+    # Tidy
     mps = pl.from_dicts(
-        rows, schema={column: pl.String for column in rows[0]})
+        rows,
+        schema={column: pl.String for column in COLUMNS_MPS})
     mps = convert_date_column(mps, "date_of_death")
+
+    # Cache
+    cache[CACHE_MPS_RAW] = mps
+
+    # Return
     return mps
 
 
@@ -68,6 +77,12 @@ def fetch_commons_memberships_raw() -> DataFrame:
     # Fetch raw
     memberships_raw = utility.fetch_query_data(
         house=HOUSE_COMMONS, data_output="Constituencies")
+
+    # Remove NULL
+    memberships_raw = [
+        member for member in memberships_raw
+        if member.get("Constituencies") is not None
+    ]
 
     # Extract data
     rows = []
@@ -81,14 +96,14 @@ def fetch_commons_memberships_raw() -> DataFrame:
                 "constituency_mnis_id": scalar(entry.get("@Id")),
                 "constituency_name": scalar(entry.get("Name")),
                 "seat_incumbency_start_date": scalar(entry.get("StartDate")),
-                "seat_incumbency_end_date": entry.get("EndDate"),
+                "seat_incumbency_end_date": scalar(entry.get("EndDate")),
                 "mnis_id": mnis_id,
             })
 
     # Tidy
-    rows = process_missing_values(rows, "seat_incumbency_end_date")
     memberships = pl.from_dicts(
-        rows, schema={column: pl.String for column in rows[0]})
+        rows,
+        schema={column: pl.String for column in COLUMNS_COMMONS_MEMBERSHIPS})
     memberships = convert_date_column(
         memberships, "seat_incumbency_start_date")
     memberships = convert_date_column(memberships, "seat_incumbency_end_date")
@@ -110,6 +125,12 @@ def fetch_mps_party_memberships_raw() -> DataFrame:
     party_memberships_raw = utility.fetch_query_data(
         house=HOUSE_COMMONS, data_output="Parties")
 
+    # Remove NULL
+    party_memberships_raw = [
+        member for member in party_memberships_raw
+        if member.get("Parties") is not None
+    ]
+
     # Extract data output for each MP
     rows = []
     for member in party_memberships_raw:
@@ -122,14 +143,14 @@ def fetch_mps_party_memberships_raw() -> DataFrame:
                 "party_mnis_id": scalar(entry.get("@Id")),
                 "party_name": scalar(entry.get("Name")),
                 "party_membership_start_date": scalar(entry.get("StartDate")),
-                "party_membership_end_date": entry.get("EndDate"),
+                "party_membership_end_date": scalar(entry.get("EndDate")),
                 "mnis_id": mnis_id,
             })
 
     # Tidy
-    rows = process_missing_values(rows, "party_membership_end_date")
     memberships = pl.from_dicts(
-        rows, schema={column: pl.String for column in rows[0]})
+        rows,
+        schema={column: pl.String for column in COLUMNS_PARTY_MEMBERSHIPS})
     memberships = convert_date_column(
         memberships, "party_membership_start_date")
     memberships = convert_date_column(
@@ -171,15 +192,15 @@ def fetch_mps_other_parliaments_raw() -> DataFrame:
                 "other_parliaments_name": scalar(entry.get("Name")),
                 "other_parliaments_incumbency_start_date": scalar(
                     entry.get("StartDate")),
-                "other_parliaments_incumbency_end_date": entry.get("EndDate"),
+                "other_parliaments_incumbency_end_date": scalar(
+                    entry.get("EndDate")),
                 "mnis_id": mnis_id,
             })
 
     # Tidy
-    rows = process_missing_values(
-        rows, "other_parliaments_incumbency_end_date")
     other_parliaments = pl.from_dicts(
-        rows, schema={column: pl.String for column in rows[0]})
+        rows,
+        schema={column: pl.String for column in COLUMNS_OTHER_PARLIAMENTS})
     other_parliaments = convert_date_column(
         other_parliaments, "other_parliaments_incumbency_start_date")
     other_parliaments = convert_date_column(
@@ -221,7 +242,8 @@ def fetch_mps_contested_elections_raw() -> DataFrame:
                     entry["Election"].get("@Id")),
                 "contested_election_name": scalar(
                     entry["Election"].get("Name")),
-                "contested_election_date": entry["Election"].get("Date"),
+                "contested_election_date": scalar(
+                    entry["Election"].get("Date")),
                 "contested_election_type": scalar(
                     entry["Election"].get("Type")),
                 "contested_election_constituency": scalar(
@@ -230,9 +252,9 @@ def fetch_mps_contested_elections_raw() -> DataFrame:
             })
 
     # Tidy
-    rows = process_missing_values(rows, "contested_election_date")
     contested_elections = pl.from_dicts(
-        rows, schema={column: pl.String for column in rows[0]})
+        rows,
+        schema={column: pl.String for column in COLUMNS_CONTESTED_ELECTIONS})
     contested_elections = convert_date_column(
         contested_elections, "contested_election_date")
 
@@ -263,7 +285,8 @@ def fetch_mps_government_roles_raw() -> DataFrame:
     government_roles = extract_data_output(
         government_roles_raw,
         "GovernmentPosts",
-        "GovernmentPost").select(
+        "GovernmentPost",
+        COLUMNS_POSTS).select(
         "mnis_id",
         pl.col("@Id").alias("government_role_mnis_id"),
         pl.col("Name").alias("government_role_name"),
@@ -304,7 +327,8 @@ def fetch_mps_opposition_roles_raw() -> DataFrame:
     opposition_roles = extract_data_output(
         opposition_roles_raw,
         "OppositionPosts",
-        "OppositionPost").select(
+        "OppositionPost",
+        COLUMNS_POSTS).select(
         "mnis_id",
         pl.col("@Id").alias("opposition_role_mnis_id"),
         pl.col("Name").alias("opposition_role_name"),
@@ -345,7 +369,8 @@ def fetch_mps_parliamentary_roles_raw() -> DataFrame:
     parliamentary_roles = extract_data_output(
         parliamentary_roles_raw,
         "ParliamentaryPosts",
-        "ParliamentaryPost").select(
+        "ParliamentaryPost",
+        COLUMNS_POSTS).select(
         "mnis_id",
         pl.col("@Id").alias("parliamentary_role_mnis_id"),
         pl.col("Name").alias("parliamentary_role_name"),
@@ -386,7 +411,8 @@ def fetch_mps_maiden_speeches_raw() -> DataFrame:
     maiden_speeches = extract_data_output(
         maiden_speeches_raw,
         "MaidenSpeeches",
-        "MaidenSpeech").select(
+        "MaidenSpeech",
+        COLUMNS_MAIDEN_SPEECHES).select(
         "mnis_id",
         pl.col("House").alias("maiden_speech_house"),
         pl.col("SpeechDate").alias("maiden_speech_date"),
@@ -426,7 +452,8 @@ def fetch_mps_addresses_raw() -> DataFrame:
     addresses = extract_data_output(
         addresses_raw,
         "Addresses",
-        "Address").select(
+        "Address",
+        COLUMNS_ADDRESSES).select(
         "mnis_id",
         pl.col("@Type_Id").alias("address_type_mnis_id"),
         pl.col("Type").alias("address_type"),

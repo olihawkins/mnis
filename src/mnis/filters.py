@@ -55,10 +55,6 @@ def filter_dates(
     if end_col not in df.columns:
         raise ValueError(missing_column_error(end_col))
 
-    # Check the dataframe has rows
-    if df.height == 0:
-        return df
-
     # Check there are dates to filter
     if from_date is None and to_date is None:
         return df
@@ -70,6 +66,11 @@ def filter_dates(
     # Check from date is before to date
     if from_date is not None and to_date is not None and from_date > to_date:
         raise ValueError("to_date is before from_date")
+
+    # Check the dataframe has rows. This follows the checks above so that
+    # invalid arguments are reported whether or not there is data to filter
+    if df.height == 0:
+        return df
 
     # Set default values
     from_after_end = pl.lit(False)
@@ -113,7 +114,6 @@ def handle_date(d: str | datetime.date | None) -> datetime.date | None:
 def filter_memberships(
         tm: DataFrame,
         fm: DataFrame,
-        tm_id_col: str,
         tm_start_col: str,
         tm_end_col: str,
         fm_start_col: str,
@@ -134,8 +134,6 @@ def filter_memberships(
         memberships to be filtered.
     :param fm: A dataframe containing the filter memberships. These are the
         memberships that are used to filter the target memberships.
-    :param tm_id_col: The name of the column in the target memberships that
-        contains the target membership id.
     :param tm_start_col: The name of the column in target memberships that
         contains the start date for the membership.
     :param tm_end_col: The name of the column in target memberships that
@@ -152,19 +150,15 @@ def filter_memberships(
         the rows that meet the filtering criteria.
     """
 
-    # Check the target dataframe has rows
-    if tm.height == 0:
-        return tm
-
     # Check the columns exist in each dataframe
-    if tm_id_col not in tm.columns:
-        raise ValueError(missing_column_error(tm_id_col))
-
     if tm_start_col not in tm.columns:
         raise ValueError(missing_column_error(tm_start_col))
 
     if tm_end_col not in tm.columns:
         raise ValueError(missing_column_error(tm_end_col))
+
+    if join_col not in tm.columns:
+        raise ValueError(missing_column_error(join_col))
 
     if fm_start_col not in fm.columns:
         raise ValueError(missing_column_error(fm_start_col))
@@ -175,10 +169,23 @@ def filter_memberships(
     if join_col not in fm.columns:
         raise ValueError(missing_column_error(join_col))
 
+    # Check the target dataframe has rows. This follows the checks above so
+    # that invalid arguments are reported whether or not there is data to
+    # filter
+    if tm.height == 0:
+        return tm
+
+    # Number the target memberships so that the match status calculated
+    # below can be attached back to the row it was calculated from. The
+    # target membership id is not sufficient for this: ids identify things
+    # like posts and parties, which the same person can hold more than once
+    # and which are sometimes missing from the data
+    tmn = tm.with_row_index("tm_row")
+
     # Create abstract copies of tm and fm
-    tma = tm.select(
+    tma = tmn.select(
+        "tm_row",
         pl.col(join_col).alias("join_col"),
-        pl.col(tm_id_col).alias("tm_id_col"),
         pl.col(tm_start_col).alias("tm_start_col"),
         pl.col(tm_end_col).alias("tm_end_col"))
 
@@ -188,8 +195,11 @@ def filter_memberships(
         pl.col(fm_end_col).alias("fm_end_col"))
 
     # Join the target memberships with the filter membership dates on
-    # join_col
-    tm_fm = tma.join(fma, on="join_col", how="left", maintain_order="left")
+    # join_col. The join is inner so that an entity with no filter
+    # memberships contributes no rows: such an entity has no period of
+    # membership for its target memberships to fall within, so all of them
+    # are excluded by the filtering below
+    tm_fm = tma.join(fma, on="join_col", how="inner", maintain_order="left")
 
     # Test if each target membership and filter membership intersect
     tm_start_after_fm_end = (
@@ -206,25 +216,34 @@ def filter_memberships(
         (~(tm_start_after_fm_end | tm_end_before_fm_start))
         .alias("in_membership"))
 
-    # Summarise the match status for each combination of entity and target
-    # membership id: membership ids identify things like posts and parties,
-    # which can be shared by many people, so the match status must be
-    # summarised per entity to filter each person's memberships separately
+    # Summarise the match status for each target membership: the join above
+    # produces one row for each combination of target membership and filter
+    # membership, so a target membership is within a membership if it
+    # intersects with any of that entity's filter memberships
     match_status = (
         tm_fm
-        .group_by("join_col", "tm_id_col")
-        .agg(pl.col("in_membership").any())
-        .rename({"join_col": join_col, "tm_id_col": tm_id_col}))
+        .group_by("tm_row")
+        .agg(pl.col("in_membership").any()))
 
     # Join the match status with the original target memberships data
-    tm_fm_status = tm.join(
+    tm_fm_status = tmn.join(
         match_status,
-        on=[join_col, tm_id_col],
+        on="tm_row",
         how="left",
         maintain_order="left")
+
+    # Set the match status explicitly for any target membership that has no
+    # status after the join. These belong to entities with no filter
+    # memberships at all, which the inner join above discards, so there is
+    # nothing to summarise for them. Such an entity has no period of
+    # membership for its target memberships to fall within, so none of them
+    # are within a membership. Stating this here means the filter below
+    # never has to depend on how it treats a null
+    tm_fm_status = tm_fm_status.with_columns(
+        pl.col("in_membership").fill_null(False))
 
     # Return the target memberships after filtering
     return (
         tm_fm_status
         .filter(pl.col("in_membership"))
-        .drop("in_membership"))
+        .drop("tm_row", "in_membership"))

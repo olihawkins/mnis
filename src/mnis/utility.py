@@ -4,20 +4,24 @@
 
 import datetime
 import json
-import math
 import polars as pl
 import re
 import requests
+import time
 
 from polars import DataFrame
 
+from mnis.cache import cache
+from mnis.constants import API_RETRIES
+from mnis.constants import API_RETRY_BACKOFF
+from mnis.constants import API_RETRY_STATUSES
+from mnis.constants import CACHE_LORDS_RAW
+from mnis.constants import CACHE_MPS_RAW
 from mnis.constants import MNIS_API
 from mnis.errors import check_query_status
 from mnis.errors import date_format_error
-
-# Constants -------------------------------------------------------------------
-
-XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
+from mnis.errors import retry_error
+from mnis.settings import get_timeout
 
 # API query functions ---------------------------------------------------------
 
@@ -27,6 +31,46 @@ def create_query(house: str, data_output: str) -> str:
     return f"{MNIS_API}House={house}|Membership=all/{data_output}"
 
 
+def fetch_query_response(query: str) -> requests.Response:
+    """Send a query to MNIS and return the response.
+
+    Each request waits for the number of seconds given by the timeout
+    setting, which can be changed with set_timeout. A request which fails
+    because it timed out, because the connection failed, or because the API
+    returned a status indicating a temporary problem, is retried after a
+    wait which doubles with each attempt. A request which fails for any
+    other reason is returned to the caller without being retried, as
+    repeating it cannot change the outcome.
+
+    :param query: The query to send to the API.
+    """
+    reason = ""
+
+    for attempt in range(API_RETRIES + 1):
+
+        # Wait before retrying
+        if attempt > 0:
+            time.sleep(API_RETRY_BACKOFF[attempt - 1])
+
+        # Send the query
+        try:
+            response = requests.get(
+                query,
+                headers={"Accept": "application/json"},
+                timeout=get_timeout())
+        except requests.exceptions.RequestException as error:
+            reason = str(error)
+            continue
+
+        # Return the response unless the status means try again
+        if response.status_code not in API_RETRY_STATUSES:
+            return response
+
+        reason = f"the API returned status {response.status_code}"
+
+    raise RuntimeError(retry_error(API_RETRIES + 1, reason))
+
+
 def fetch_query_data(house: str, data_output: str) -> list[dict]:
     """Fetch data from MNIS based on given query."""
 
@@ -34,7 +78,7 @@ def fetch_query_data(house: str, data_output: str) -> list[dict]:
     query = create_query(house, data_output)
 
     # Fetch data
-    response = requests.get(query, headers={"Accept": "application/json"})
+    response = fetch_query_response(query)
     check_query_status(response.status_code)
     query_data = json.loads(response.content.decode("utf-8-sig"))
     return query_data["Members"]["Member"]
@@ -43,58 +87,47 @@ def fetch_query_data(house: str, data_output: str) -> list[dict]:
 # Missing data functions ------------------------------------------------------
 
 
-def process_missing_values(data: list[dict], column: str) -> list[dict]:
-    """Convert values representing missing data in a column to None.
+def scalar(value: object) -> object:
+    """Convert a raw JSON value to a scalar, mapping nil objects to None.
 
-    The MNIS API represents missing values with an XML nil object, which
-    appears as a dict after parsing the JSON. This function operates on the
-    rows of extracted data before they are converted to a dataframe: rows
-    whose value in the given column is the bare XML schema namespace are
-    removed, and values which are nil objects (or the residual string "true")
-    are replaced with None. This mirrors the behaviour of the equivalent
-    function in the R package, which operates on R's deparsed representation
-    of the same nil objects.
+    The MNIS API represents a missing value with an XML nil object, which
+    appears as a dict after parsing the JSON. Values taken from the parsed
+    JSON are passed through this function so that a missing value becomes
+    None.
+
+    :param value: The value taken from the parsed JSON.
     """
-    rows = [row for row in data if row.get(column) != XSI_NAMESPACE]
-    for row in rows:
-        value = row.get(column)
-        if value == "true" or isinstance(value, dict):
-            row[column] = None
-    return rows
+    return None if isinstance(value, dict) else value
 
 
 # Data handling functions -----------------------------------------------------
 
 
-def process_member_age(
-        from_date: datetime.date,
-        to_date: datetime.date | None) -> int:
-    """Calculate current age of member."""
-
-    def decimal_date(d: datetime.date) -> float:
-        year_start = datetime.date(d.year, 1, 1)
-        next_year_start = datetime.date(d.year + 1, 1, 1)
-        year_length = (next_year_start - year_start).days
-        return d.year + (d - year_start).days / year_length
-
-    if to_date is None:
-        to_date = datetime.date.today()
-    return math.floor(decimal_date(to_date) - decimal_date(from_date))
-
-
 def extract_data_output(
         data_output: list[dict],
         col_section_a: str,
-        col_section_b: str) -> DataFrame:
+        col_section_b: str,
+        columns: list[str]) -> DataFrame:
     """Extract data output.
 
     Takes the list of member data returned from the API and extracts the
     entries nested under the two given keys for each member, returning one
     row per entry with the member's id in a column called mnis_id. Values
     which are nil objects are converted to None.
+
+    The columns of the dataframe returned are those given in columns, which
+    are the field names used by MNIS for the given data output, together
+    with mnis_id. The columns are specified rather than taken from the data
+    so that the dataframe has the same structure whatever the API returns:
+    a field which is absent from every record in a response, or a response
+    with no records at all, still produces the expected columns.
+
+    :param data_output: The list of member data returned from the API.
+    :param col_section_a: The key of the section containing the entries.
+    :param col_section_b: The key of the entries within that section.
+    :param columns: The names of the columns of the data output.
     """
     rows = []
-    columns = []
     for member in data_output:
         mnis_id = member["@Member_Id"]
         entries = member[col_section_a][col_section_b]
@@ -106,9 +139,6 @@ def extract_data_output(
                 for key, value in entry.items()
             }
             row["mnis_id"] = mnis_id
-            for key in row:
-                if key not in columns:
-                    columns.append(key)
             rows.append(row)
     schema = {column: pl.String for column in columns}
     return pl.from_dicts(rows, schema=schema)
@@ -119,8 +149,14 @@ def process_mps_output(output_table: DataFrame) -> DataFrame:
 
     from mnis.raw_mps import fetch_mps_raw
 
-    # Fetch basic details
-    mps = fetch_mps_raw().select(
+    # Check cache
+    if CACHE_MPS_RAW not in cache:
+        mps = fetch_mps_raw()
+    else:
+        mps = cache[CACHE_MPS_RAW]
+
+    # Select basic details
+    mps = mps.select(
         "mnis_id",
         "given_name",
         "family_name",
@@ -139,8 +175,14 @@ def process_lords_output(output_table: DataFrame) -> DataFrame:
 
     from mnis.raw_lords import fetch_lords_raw
 
-    # Fetch basic details
-    lords = fetch_lords_raw().select(
+    # Check cache
+    if CACHE_LORDS_RAW not in cache:
+        lords = fetch_lords_raw()
+    else:
+        lords = cache[CACHE_LORDS_RAW]
+
+    # Select basic details
+    lords = lords.select(
         "mnis_id",
         "given_name",
         "family_name",

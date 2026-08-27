@@ -212,16 +212,6 @@ mnis.fetch_mps_websites(from_date=None, to_date=None, on_date=None)
 
 ---
 
-__fetch_mps_blogs__
-
-Fetch a dataframe of blogs for each MP, with one row per combination of MP and blog.
-
-```python
-mnis.fetch_mps_blogs(from_date=None, to_date=None, on_date=None)
-```
-
----
-
 __fetch_mps_twitter__
 
 Fetch a dataframe of twitter accounts for each MP, with one row per combination of MP and twitter account.
@@ -429,16 +419,6 @@ mnis.fetch_lords_websites(from_date=None, to_date=None, on_date=None)
 
 ---
 
-__fetch_lords_blogs__
-
-Fetch a dataframe of blogs for each Lord, with one row per combination of Lord and blog.
-
-```python
-mnis.fetch_lords_blogs(from_date=None, to_date=None, on_date=None)
-```
-
----
-
 __fetch_lords_twitter__
 
 Fetch a dataframe of twitter accounts for each Lord, with one row per combination of Lord and twitter account.
@@ -465,6 +445,54 @@ Fetch a dataframe of facebook accounts for each Lord, with one row per combinati
 
 ```python
 mnis.fetch_lords_facebook(from_date=None, to_date=None, on_date=None)
+```
+
+---
+
+## Settings
+
+### Timeout
+
+Each request to the MNIS API waits 20 seconds for a response by default. A request which times out, or which fails because the connection failed or because the API reports a temporary problem, is retried up to five times, waiting 1, 2, 4, 8 and 16 seconds before each retry in turn. Requests which fail for any other reason are not retried.
+
+Use `set_timeout` to change how long requests wait. Raise it on a slow connection to stop requests timing out before the data arrives, or lower it on a fast one to fail sooner. The setting applies to every request made for the rest of the session.
+
+---
+
+__get_timeout__
+
+Return the number of seconds each request waits for a response from MNIS.
+
+```python
+mnis.get_timeout()
+```
+
+---
+
+__set_timeout__
+
+Set the number of seconds each request waits for a response from MNIS. The timeout must be a positive number.
+
+```python
+mnis.set_timeout(timeout)
+```
+
+---
+
+## Caching
+
+Data downloaded from the MNIS API is cached in memory for the duration of a session. Each distinct query is downloaded the first time it is needed and reused after that, so calling several functions that depend on the same underlying data does not download it more than once.
+
+The cache lasts for as long as the session, and has no expiry. This means that data downloaded in a long running session does not reflect any changes made to MNIS after it was downloaded. Use `clear_cache` to discard the cached data and download it again.
+
+---
+
+__clear_cache__
+
+Clear all data cached from MNIS. The whole cache is emptied: subsequent calls to the fetch functions download the data they need again.
+
+```python
+mnis.clear_cache()
 ```
 
 ---

@@ -5,7 +5,7 @@ The mnis package provides a suite of functions for downloading data from
 the data platform for the UK Parliament.
 """
 
-from mnis.contacts_lords import fetch_lords_blogs
+from mnis.cache import clear_cache
 from mnis.contacts_lords import fetch_lords_email_addresses
 from mnis.contacts_lords import fetch_lords_facebook
 from mnis.contacts_lords import fetch_lords_fax_numbers
@@ -14,7 +14,6 @@ from mnis.contacts_lords import fetch_lords_office_addresses
 from mnis.contacts_lords import fetch_lords_phone_numbers
 from mnis.contacts_lords import fetch_lords_twitter
 from mnis.contacts_lords import fetch_lords_websites
-from mnis.contacts_mps import fetch_mps_blogs
 from mnis.contacts_mps import fetch_mps_email_addresses
 from mnis.contacts_mps import fetch_mps_facebook
 from mnis.contacts_mps import fetch_mps_fax_numbers
@@ -25,6 +24,8 @@ from mnis.contacts_mps import fetch_mps_twitter
 from mnis.contacts_mps import fetch_mps_websites
 from mnis.elections import get_general_elections
 from mnis.elections import get_general_elections_list
+from mnis.settings import get_timeout
+from mnis.settings import set_timeout
 from mnis.lords import fetch_lords
 from mnis.lords import fetch_lords_addresses
 from mnis.lords import fetch_lords_contested_elections
@@ -47,10 +48,10 @@ from mnis.mps import fetch_mps_parliamentary_roles
 from mnis.mps import fetch_mps_party_memberships
 
 __all__ = [
+    "clear_cache",
     "fetch_commons_memberships",
     "fetch_lords",
     "fetch_lords_addresses",
-    "fetch_lords_blogs",
     "fetch_lords_contested_elections",
     "fetch_lords_email_addresses",
     "fetch_lords_facebook",
@@ -69,7 +70,6 @@ __all__ = [
     "fetch_lords_websites",
     "fetch_mps",
     "fetch_mps_addresses",
-    "fetch_mps_blogs",
     "fetch_mps_contested_elections",
     "fetch_mps_email_addresses",
     "fetch_mps_facebook",
@@ -87,4 +87,6 @@ __all__ = [
     "fetch_mps_websites",
     "get_general_elections",
     "get_general_elections_list",
+    "get_timeout",
+    "set_timeout",
 ]
