@@ -13,7 +13,27 @@ Version 2 is a complete rewrite of the previous Python `mnis` package. It is **n
 
 ## Installation
 
-Install from GitHub using `pip`.
+### Latest Version
+
+You can install the latest version of the package from PyPI.
+
+Using `pip`.
+
+```sh
+ pip install mnis
+```
+
+Using `uv`.
+
+```sh
+uv add mnis
+```
+
+### Latest Development Version
+
+You can install the latest development version from GitHub.
+
+Uusing `pip`.
 
 ```sh
 pip install git+https://github.com/olihawkins/mnis

@@ -8,11 +8,39 @@ license-files = ["LICENSE", "LICENSE-clmnis"]
 authors = [
     { name = "Oliver Hawkins", email = "oli@olihawkins.com" }
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.10"
+keywords = [
+    "parliament",
+    "politics",
+    "members",
+    "mnis",
+    "uk",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Sociology",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
     "polars>=1.43.2",
     "requests>=2.34.2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/olihawkins/mnis"
+Repository = "https://github.com/olihawkins/mnis"
+Issues = "https://github.com/olihawkins/mnis/issues"
 
 [build-system]
 requires = ["uv_build>=0.12.3,<0.13.0"]
@@ -21,7 +49,7 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "build>=1.5.0",
-    "ipython>=9.16.1",
+    "ipython>=8.18",
     "pytest>=8.4.2",
 ]
 
