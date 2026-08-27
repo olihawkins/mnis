@@ -67,7 +67,8 @@ def fetch_members_office_addresses(
             "postcode"))
 
     # Filter office addresses for the given members
-    return offices.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return offices.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Email addresses -------------------------------------------------------------
@@ -101,7 +102,8 @@ def fetch_members_email_addresses(
             "email"))
 
     # Filter email addresses for the given members
-    return emails.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return emails.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Phone numbers ---------------------------------------------------------------
@@ -135,7 +137,8 @@ def fetch_members_phone_numbers(
             "phone"))
 
     # Filter phone numbers for the given members
-    return phones.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return phones.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Fax numbers -----------------------------------------------------------------
@@ -169,7 +172,8 @@ def fetch_members_fax_numbers(
             "fax"))
 
     # Filter fax numbers for the given members
-    return faxes.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return faxes.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Websites --------------------------------------------------------------------
@@ -203,7 +207,8 @@ def fetch_members_websites(
             pl.col("address_1").alias("url")))
 
     # Filter websites for the given members
-    return websites.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return websites.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Twitter ---------------------------------------------------------------------
@@ -244,7 +249,8 @@ def fetch_members_twitter(
         .alias("username"))
 
     # Filter Twitter accounts for the given members
-    return accounts.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return accounts.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Instagram -------------------------------------------------------------------
@@ -284,7 +290,8 @@ def fetch_members_instagram(
         .alias("username"))
 
     # Filter Instagram accounts for the given members
-    return accounts.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return accounts.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
 
 # Facebook --------------------------------------------------------------------
@@ -324,4 +331,5 @@ def fetch_members_facebook(
         .alias("username"))
 
     # Filter Facebook accounts for the given members
-    return accounts.filter(pl.col("mnis_id").is_in(members["mnis_id"]))
+    return accounts.filter(
+        pl.col("mnis_id").is_in(members["mnis_id"].implode()))

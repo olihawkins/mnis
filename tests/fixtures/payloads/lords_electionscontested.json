@@ -1,0 +1,217 @@
+[
+ {
+  "@Member_Id": "3305",
+  "@Dods_Id": "",
+  "@Pims_Id": "",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Aberconway",
+  "ListAs": "Aberconway, L.",
+  "FullTitle": "The Lord Aberconway",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2003-02-04T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Hereditary",
+  "HouseStartDate": "1953-05-23T00:00:00",
+  "HouseEndDate": "1999-11-11T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "ElectionsContested": null
+ },
+ {
+  "@Member_Id": "3743",
+  "@Dods_Id": "19424",
+  "@Pims_Id": "4852",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Adonis",
+  "ListAs": "Adonis, L.",
+  "FullTitle": "The Rt Hon. the Lord Adonis",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2005-05-16T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2005-05-16T00:00:00"
+  },
+  "ElectionsContested": null
+ },
+ {
+  "@Member_Id": "4508",
+  "@Dods_Id": "72301",
+  "@Pims_Id": "6155",
+  "@Clerks_Id": "1402",
+  "DisplayAs": "Baroness Anderson of Stoke-on-Trent",
+  "ListAs": "Anderson of Stoke-on-Trent, B.",
+  "FullTitle": "The Baroness Anderson of Stoke-on-Trent",
+  "LayingMinisterName": "Baroness Anderson of Stoke-on-Trent",
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "F",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2022-11-18T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2022-11-18T00:00:00"
+  },
+  "ElectionsContested": {
+   "ElectionContested": {
+    "Election": {
+     "@Id": "397",
+     "Name": "2019 General Election",
+     "Date": "2019-12-12T00:00:00",
+     "Type": "General Election"
+    },
+    "Constituency": "Stoke-on-Trent North"
+   }
+  }
+ },
+ {
+  "@Member_Id": "56",
+  "@Dods_Id": "25712",
+  "@Pims_Id": "3774",
+  "@Clerks_Id": "14",
+  "DisplayAs": "Lord Arbuthnot of Edrom",
+  "ListAs": "Arbuthnot of Edrom, L.",
+  "FullTitle": "The Rt Hon. the Lord Arbuthnot of Edrom",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2015-10-01T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2015-10-01T00:00:00"
+  },
+  "ElectionsContested": {
+   "ElectionContested": [
+    {
+     "Election": {
+      "@Id": "281",
+      "Name": "1984-05-03 Cynon Valley By-election",
+      "Date": "1984-05-03T00:00:00",
+      "Type": "By-election"
+     },
+     "Constituency": "Cynon Valley"
+    },
+    {
+     "Election": {
+      "@Id": "12",
+      "Name": "1983 General Election",
+      "Date": "1983-06-09T00:00:00",
+      "Type": "General Election"
+     },
+     "Constituency": "Cynon Valley"
+    }
+   ]
+  }
+ },
+ {
+  "@Member_Id": "4149",
+  "@Dods_Id": "25398",
+  "@Pims_Id": "2245",
+  "@Clerks_Id": "465",
+  "DisplayAs": "Lord Bannside",
+  "ListAs": "Bannside, L.",
+  "FullTitle": "The Rev and the Rt Hon. the Lord Bannside",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2014-09-12T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "7",
+   "#text": "Democratic Unionist Party"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2010-06-18T00:00:00",
+  "HouseEndDate": "2014-09-12T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "ElectionsContested": null
+ }
+]

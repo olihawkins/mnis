@@ -449,6 +449,34 @@ mnis.fetch_lords_facebook(from_date=None, to_date=None, on_date=None)
 
 ---
 
+## General elections
+
+These functions return the dates of UK general elections since 1929. The dates are held in the package rather than fetched from MNIS, so these functions do not call the API.
+
+The dissolution date is the date on which the Parliament preceding each election was dissolved. The Commons membership functions treat a membership as ending at the dissolution of Parliament rather than on the date of the election which followed it, so these dates are useful for analysing Commons memberships over time.
+
+---
+
+__get_general_elections__
+
+Fetch a dataframe of the dates of UK general elections since 1929, with one row per general election. The dataframe has three columns: `name`, which is the name of the election as a string; `dissolution`, which is the date the preceding Parliament was dissolved; and `election`, which is the date of the election. The two general elections of 1974 are named "1974 (Feb)" and "1974 (Oct)".
+
+```python
+mnis.get_general_elections()
+```
+
+---
+
+__get_general_elections_list__
+
+Fetch the same dates as a dict, keyed with the name of each general election. Each item is a dict of two dates: `dissolution` and `election`. This is a convenience for looking up the dates of a given election by name.
+
+```python
+mnis.get_general_elections_list()
+```
+
+---
+
 ## Settings
 
 ### Timeout
@@ -494,6 +522,58 @@ Clear all data cached from MNIS. The whole cache is emptied: subsequent calls to
 ```python
 mnis.clear_cache()
 ```
+
+---
+
+## Development
+
+### Running the tests
+
+The tests need the development dependencies, which `uv` installs with the package:
+
+```sh
+uv sync
+```
+
+Run the test suite from the root of the repository:
+
+```sh
+uv run pytest
+```
+
+Most of the tests run against saved API responses rather than the live MNIS API, so the suite needs no network connection and takes under a second.
+
+### Testing against the live API
+
+Tests which call the live API are marked `live` and are not run by default, because they fail when MNIS changes as well as when the package is wrong. Run them to check the package against the API as it is now:
+
+```sh
+uv run pytest -m live
+```
+
+These take a couple of minutes. They check that every function still works, that the data holds the relationships the package relies on, and that every column the package declares is still returned by the API. Run them before a release, and when you want to know whether MNIS has changed.
+
+To see which fields MNIS returns that the package does not use:
+
+```sh
+uv run pytest -m live -k report_fields -s
+```
+
+### Rebuilding the test fixtures
+
+The saved API responses are trimmed to a handful of members chosen to cover the cases the package has to handle. Rebuild them from the live API with:
+
+```sh
+uv run python tests/fixtures/build_payloads.py
+```
+
+The columns each function returns are recorded in `tests/fixtures/schemas.json`, and the tests check the functions against that record. After deliberately changing what a function returns, rebuild the record and review the diff:
+
+```sh
+uv run python tests/fixtures/build_schemas.py
+```
+
+A change in that diff which you did not intend is a bug.
 
 ---
 

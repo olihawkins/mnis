@@ -1,0 +1,265 @@
+[
+ {
+  "@Member_Id": "172",
+  "@Dods_Id": "25790",
+  "@Pims_Id": "3572",
+  "@Clerks_Id": "1",
+  "DisplayAs": "Ms Diane Abbott",
+  "ListAs": "Abbott, Ms Diane",
+  "FullTitle": "Rt Hon Diane Abbott MP",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "F",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Commons",
+  "MemberFrom": "Hackney North and Stoke Newington",
+  "HouseStartDate": "1987-06-11T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2024-07-04T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "5131",
+  "@Dods_Id": "109725",
+  "@Pims_Id": "6547",
+  "@Clerks_Id": "",
+  "DisplayAs": "Jack Abbott",
+  "ListAs": "Abbott, Jack",
+  "FullTitle": "Jack Abbott MP",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour (Co-op)"
+  },
+  "House": "Commons",
+  "MemberFrom": "Ipswich",
+  "HouseStartDate": "2024-07-04T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2024-07-04T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "4212",
+  "@Dods_Id": "80556",
+  "@Pims_Id": "5905",
+  "@Clerks_Id": "5905",
+  "DisplayAs": "Debbie Abrahams",
+  "ListAs": "Abrahams, Debbie",
+  "FullTitle": "Debbie Abrahams MP",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "F",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Commons",
+  "MemberFrom": "Oldham East and Saddleworth",
+  "HouseStartDate": "2011-01-13T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2024-07-04T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "662",
+  "@Dods_Id": "",
+  "@Pims_Id": "",
+  "@Clerks_Id": "",
+  "DisplayAs": "Leo Abse",
+  "ListAs": "Abse, Leo",
+  "FullTitle": "Leo Abse",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2008-08-19T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Commons",
+  "MemberFrom": "Torfaen",
+  "HouseStartDate": "1958-11-10T00:00:00",
+  "HouseEndDate": "1987-06-11T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "5120",
+  "@Dods_Id": "174942",
+  "@Pims_Id": "6536",
+  "@Clerks_Id": "",
+  "DisplayAs": "Shockat Adam",
+  "ListAs": "Adam, Shockat",
+  "FullTitle": "Shockat Adam MP",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "8",
+   "#text": "Independent"
+  },
+  "House": "Commons",
+  "MemberFrom": "Leicester South",
+  "HouseStartDate": "2024-07-04T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2024-07-04T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "4057",
+  "@Dods_Id": "35435",
+  "@Pims_Id": "5556",
+  "@Clerks_Id": "1144",
+  "DisplayAs": "Nigel Adams",
+  "ListAs": "Adams, Nigel",
+  "FullTitle": "Rt Hon Nigel Adams",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Commons",
+  "MemberFrom": "Selby and Ainsty",
+  "HouseStartDate": "2010-05-06T00:00:00",
+  "HouseEndDate": "2023-06-12T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "4639",
+  "@Dods_Id": "133811",
+  "@Pims_Id": "6196",
+  "@Clerks_Id": "1446",
+  "DisplayAs": "Bim Afolami",
+  "ListAs": "Afolami, Bim",
+  "FullTitle": "Bim Afolami",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Commons",
+  "MemberFrom": "Hitchin and Harpenden",
+  "HouseStartDate": "2017-06-08T00:00:00",
+  "HouseEndDate": "2024-05-30T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "OtherParliaments": null
+ }
+]

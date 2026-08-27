@@ -1016,31 +1016,85 @@ After the fixes to findings 1 to 3:
 - Output is unchanged for every function except the eight listed under finding
   3, where 789 wrongly retained rows are now excluded.
 
+## Test suite
+
+A test suite was added after the findings were closed. It lives in `tests`,
+runs under pytest, and is described for developers in the README.
+
+**405 tests run in under a second and need no network.** They cover the pure
+logic in `filters`, `combine`, `contacts`, `utility`, `settings` and
+`elections`; the raw fetch functions against awkward API responses; the HTTP
+layer with a mocked transport; and the whole package end to end against saved
+API payloads. A further 105 tests are marked `live`, deselected by default, and
+check the package against the API as it is now.
+
+The split matters: correctness tests assert exact values against payloads which
+do not change, while live tests assert only invariants. Asserting a row count
+against live data would fail whenever MNIS updates — as `fetch_lords_addresses`
+did during this work, moving from 1,244 to 1,246 rows in an afternoon.
+
+Every finding above has a test. Some notes on what the suite added beyond them:
+
+- **The saved payloads are trimmed to eleven members**, chosen so that between
+  them they cover the cases the code has to handle, and listed with the reason
+  for each in `tests/fixtures/build_payloads.py`. Diane Abbott's party
+  memberships alone cover finding 3: Labour, Independent, Labour, Independent,
+  Labour, which `collapse` has to reduce to five spells rather than three.
+- **A path that no finding covered.** The API returns a bare object rather than
+  a list when a member has only one entry, and every extractor normalises that
+  with `if isinstance(entries, dict)`. This is heavily used — 672 MPs have a
+  single constituency — but nothing in the review exercised it. The suite now
+  checks both shapes produce identical frames, for all ten extractors.
+- **The recorded schemas** in `tests/fixtures/schemas.json` pin the columns and
+  types of all 57 datasets, so a change to any of them has to be made
+  deliberately by rebuilding the file.
+- **The column constants are checked against the code that builds the rows**,
+  which is the guard the design decision under finding 9 needed: polars drops a
+  key absent from the schema without raising, so a column added to the rows but
+  not to its constant would otherwise vanish silently.
+- **API drift detection**, the open question from finding 9, is now answered by
+  the live tests. They assert every declared column is still returned, and
+  report the fields MNIS returns that the package ignores.
+
+### A defect the suite surfaced immediately
+
+Running the tests raised `DeprecationWarning` from polars at **ten call sites**
+— `contacts.py` (eight), `mps.py:99` and `lords.py:99`:
+
+```
+`is_in` with a collection of the same datatype is ambiguous and deprecated.
+Please use `implode` to return to previous behavior.
+```
+
+Every one was the same shape, `pl.col("mnis_id").is_in(members["mnis_id"])`.
+The behaviour was correct on polars 1.43.2, but would become a real bug when
+polars resolves the ambiguity.
+
+**Fixed.** All ten now pass `.implode()`. The suite runs with no warnings at
+all, where it previously raised 25, and live results are unchanged across
+eleven datasets and the date-filtered paths.
+
+A test guards against the deprecation returning, and writing it turned up
+something worth recording. The obvious guard — pytest's
+`@pytest.mark.filterwarnings("error::DeprecationWarning")` — **does not work
+for this warning**. Reverting one call site and running that guard gave a
+pass. Polars raises this warning from inside its own code and does not let the
+exception escape, so turning warnings into errors never reaches the test. The
+guard records warnings with `warnings.catch_warnings(record=True)` and asserts
+the list is empty instead, which was verified to fail on a reverted call site
+and to name the file and line responsible.
+
 ## Suggested order of work
 
-All thirteen findings are closed. What is left is not bug work:
+The thirteen findings are closed and the test suite is in place. What is left:
 
-1. **Tests.** There are none. The highest-value first test is the
-   column-declaration check described under finding 9, which is also the API
-   drift detection that finding 9 notes is still missing. The cases written
-   while fixing findings 2, 3, 5, 8, 10, 12 and 13 are a natural seed for the
-   rest; they exist only as throwaway scripts today. Pinning the finding 3
-   behaviour matters most, as the correct result there is subtle enough that a
-   regression would be easy to miss.
-2. **Deferred features**, in the order they were deferred: accessors for the
+1. **Deferred features**, in the order they were deferred: accessors for the
    social platforms MNIS has added since the blogs type was retired (finding
    11), and wiring up `API_PAUSE_TIME` (finding 13).
-3. **Two loose ends left as they stand**: `MISSING_VALUE_STRING` and
-   `cast_date` are unreferenced, and `get_general_elections` /
-   `get_general_elections_list` are undocumented in the README — a gap that
-   predates this work.
-
-The column-declaration test is worth spelling out, as it does double duty:
-compare every `COLUMNS_*` constant against both the fields MNIS actually
-returns and the keys the row dictionaries actually build, and report the
-differences. That makes a new MNIS field visible rather than merely ignored,
-and it catches a row key added without its constant, which polars would
-otherwise drop silently.
+2. **One loose end left as it stands**: `MISSING_VALUE_STRING` and `cast_date`
+   are unreferenced. The README gap noted earlier is closed —
+   `get_general_elections` and `get_general_elections_list` are now documented,
+   and a test keeps the README and `__all__` in step.
 
 On the unreferenced code: deleting is cheaper than repairing wherever the code
 genuinely has no future caller, which is how findings 4 and 10 were resolved.

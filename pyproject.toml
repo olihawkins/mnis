@@ -22,4 +22,12 @@ build-backend = "uv_build"
 dev = [
     "build>=1.5.0",
     "ipython>=9.16.1",
+    "pytest>=8.4.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers -m 'not live'"
+markers = [
+    "live: tests which call the live MNIS API. These are deselected by default: run them with -m live",
 ]

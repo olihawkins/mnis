@@ -1,0 +1,232 @@
+[
+ {
+  "@Member_Id": "3305",
+  "@Dods_Id": "",
+  "@Pims_Id": "",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Aberconway",
+  "ListAs": "Aberconway, L.",
+  "FullTitle": "The Lord Aberconway",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2003-02-04T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Hereditary",
+  "HouseStartDate": "1953-05-23T00:00:00",
+  "HouseEndDate": "1999-11-11T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "3743",
+  "@Dods_Id": "19424",
+  "@Pims_Id": "4852",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Adonis",
+  "ListAs": "Adonis, L.",
+  "FullTitle": "The Rt Hon. the Lord Adonis",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2005-05-16T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2005-05-16T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "4508",
+  "@Dods_Id": "72301",
+  "@Pims_Id": "6155",
+  "@Clerks_Id": "1402",
+  "DisplayAs": "Baroness Anderson of Stoke-on-Trent",
+  "ListAs": "Anderson of Stoke-on-Trent, B.",
+  "FullTitle": "The Baroness Anderson of Stoke-on-Trent",
+  "LayingMinisterName": "Baroness Anderson of Stoke-on-Trent",
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "F",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2022-11-18T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2022-11-18T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "56",
+  "@Dods_Id": "25712",
+  "@Pims_Id": "3774",
+  "@Clerks_Id": "14",
+  "DisplayAs": "Lord Arbuthnot of Edrom",
+  "ListAs": "Arbuthnot of Edrom, L.",
+  "FullTitle": "The Rt Hon. the Lord Arbuthnot of Edrom",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2015-10-01T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2015-10-01T00:00:00"
+  },
+  "OtherParliaments": null
+ },
+ {
+  "@Member_Id": "4149",
+  "@Dods_Id": "25398",
+  "@Pims_Id": "2245",
+  "@Clerks_Id": "465",
+  "DisplayAs": "Lord Bannside",
+  "ListAs": "Bannside, L.",
+  "FullTitle": "The Rev and the Rt Hon. the Lord Bannside",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2014-09-12T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "7",
+   "#text": "Democratic Unionist Party"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2010-06-18T00:00:00",
+  "HouseEndDate": "2014-09-12T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "OtherParliaments": {
+   "OtherParliament": [
+    {
+     "@Id": "15",
+     "Name": "Northern Ireland Assembly",
+     "Country": null,
+     "StartDate": "1998-06-25T00:00:00",
+     "EndDate": {
+      "@xsi:nil": "true",
+      "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+     },
+     "Note": null
+    },
+    {
+     "@Id": "15",
+     "Name": "Northern Ireland Assembly",
+     "Country": null,
+     "StartDate": "1982-10-20T00:00:00",
+     "EndDate": "1986-01-01T00:00:00",
+     "Note": null
+    },
+    {
+     "@Id": "6",
+     "Name": "European Parliament",
+     "Country": null,
+     "StartDate": "1979-06-01T00:00:00",
+     "EndDate": "2004-06-10T00:00:00",
+     "Note": null
+    },
+    {
+     "@Id": "15",
+     "Name": "Northern Ireland Assembly",
+     "Country": null,
+     "StartDate": "1973-06-28T00:00:00",
+     "EndDate": "1974-05-28T00:00:00",
+     "Note": null
+    },
+    {
+     "@Id": "16",
+     "Name": "Northern Ireland Parliament",
+     "Country": null,
+     "StartDate": "1970-04-16T00:00:00",
+     "EndDate": "1972-03-30T00:00:00",
+     "Note": null
+    }
+   ]
+  }
+ }
+]

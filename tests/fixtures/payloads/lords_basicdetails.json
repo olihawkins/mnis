@@ -1,0 +1,411 @@
+[
+ {
+  "@Member_Id": "3305",
+  "@Dods_Id": "",
+  "@Pims_Id": "",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Aberconway",
+  "ListAs": "Aberconway, L.",
+  "FullTitle": "The Lord Aberconway",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2003-02-04T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Hereditary",
+  "HouseStartDate": "1953-05-23T00:00:00",
+  "HouseEndDate": "1999-11-11T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "BasicDetails": {
+   "GivenSurname": "McLaren",
+   "GivenMiddleNames": "Melville",
+   "GivenForename": "Charles",
+   "TownOfBirth": null,
+   "CountryOfBirth": null,
+   "Gender": "M",
+   "DateOfBirth": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfRetirement": "1999-11-11T00:00:00",
+   "DateOfDeath": "2003-02-04T00:00:00",
+   "LordsDetails": {
+    "DateOfAnnouncement": {
+     "@xsi:nil": "true",
+     "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+    },
+    "DateOfIntroduction": "1953-10-28T00:00:00",
+    "DateOfWrit": "1953-10-08T00:00:00",
+    "MembershipTypes": {
+     "MembershipType": {
+      "Type": "Hereditary",
+      "StartDate": "1953-05-23T00:00:00",
+      "EndDate": "2003-02-04T00:00:00"
+     }
+    },
+    "Oaths": {
+     "Oath": {
+      "Date": "1992-04-27T00:00:00"
+     }
+    }
+   }
+  }
+ },
+ {
+  "@Member_Id": "3743",
+  "@Dods_Id": "19424",
+  "@Pims_Id": "4852",
+  "@Clerks_Id": "",
+  "DisplayAs": "Lord Adonis",
+  "ListAs": "Adonis, L.",
+  "FullTitle": "The Rt Hon. the Lord Adonis",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2005-05-16T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2005-05-16T00:00:00"
+  },
+  "BasicDetails": {
+   "GivenSurname": "Adonis",
+   "GivenMiddleNames": null,
+   "GivenForename": "Andrew",
+   "TownOfBirth": null,
+   "CountryOfBirth": null,
+   "Gender": "M",
+   "DateOfBirth": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfRetirement": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfDeath": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "LordsDetails": {
+    "DateOfAnnouncement": "2005-05-09T00:00:00",
+    "DateOfIntroduction": "2005-05-23T00:00:00",
+    "DateOfWrit": "2005-05-16T00:00:00",
+    "MembershipTypes": {
+     "MembershipType": {
+      "Type": "Life peer",
+      "StartDate": "2005-05-16T00:00:00",
+      "EndDate": {
+       "@xsi:nil": "true",
+       "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+      }
+     }
+    },
+    "Oaths": {
+     "Oath": [
+      {
+       "Date": "2024-11-20T00:00:00"
+      },
+      {
+       "Date": "2022-10-13T00:00:00"
+      },
+      {
+       "Date": "2019-12-18T00:00:00"
+      },
+      {
+       "Date": "2019-12-18T00:00:00"
+      },
+      {
+       "Date": "2017-06-14T00:00:00"
+      },
+      {
+       "Date": "2015-05-18T00:00:00"
+      },
+      {
+       "Date": "2010-05-18T00:00:00"
+      },
+      {
+       "Date": "2005-05-23T00:00:00"
+      }
+     ]
+    }
+   }
+  }
+ },
+ {
+  "@Member_Id": "4508",
+  "@Dods_Id": "72301",
+  "@Pims_Id": "6155",
+  "@Clerks_Id": "1402",
+  "DisplayAs": "Baroness Anderson of Stoke-on-Trent",
+  "ListAs": "Anderson of Stoke-on-Trent, B.",
+  "FullTitle": "The Baroness Anderson of Stoke-on-Trent",
+  "LayingMinisterName": "Baroness Anderson of Stoke-on-Trent",
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "F",
+  "Party": {
+   "@Id": "15",
+   "#text": "Labour"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2022-11-18T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2022-11-18T00:00:00"
+  },
+  "BasicDetails": {
+   "GivenSurname": "Smeeth",
+   "GivenMiddleNames": "Lauren",
+   "GivenForename": "Ruth",
+   "TownOfBirth": null,
+   "CountryOfBirth": null,
+   "Gender": "F",
+   "DateOfBirth": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfRetirement": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfDeath": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "LordsDetails": {
+    "DateOfAnnouncement": "2022-10-14T00:00:00",
+    "DateOfIntroduction": "2022-12-08T00:00:00",
+    "DateOfWrit": "2022-11-18T00:00:00",
+    "MembershipTypes": {
+     "MembershipType": {
+      "Type": "Life peer",
+      "StartDate": "2022-11-18T00:00:00",
+      "EndDate": {
+       "@xsi:nil": "true",
+       "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+      }
+     }
+    },
+    "Oaths": {
+     "Oath": [
+      {
+       "Date": "2024-07-09T00:00:00"
+      },
+      {
+       "Date": "2022-12-08T00:00:00"
+      }
+     ]
+    }
+   }
+  }
+ },
+ {
+  "@Member_Id": "56",
+  "@Dods_Id": "25712",
+  "@Pims_Id": "3774",
+  "@Clerks_Id": "14",
+  "DisplayAs": "Lord Arbuthnot of Edrom",
+  "ListAs": "Arbuthnot of Edrom, L.",
+  "FullTitle": "The Rt Hon. the Lord Arbuthnot of Edrom",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "Gender": "M",
+  "Party": {
+   "@Id": "4",
+   "#text": "Conservative"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2015-10-01T00:00:00",
+  "HouseEndDate": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "CurrentStatus": {
+   "@Id": "0",
+   "@IsActive": "True",
+   "Name": "Current Member",
+   "Reason": null,
+   "StartDate": "2015-10-01T00:00:00"
+  },
+  "BasicDetails": {
+   "GivenSurname": "Arbuthnot",
+   "GivenMiddleNames": null,
+   "GivenForename": "James",
+   "TownOfBirth": null,
+   "CountryOfBirth": null,
+   "Gender": "M",
+   "DateOfBirth": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfRetirement": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfDeath": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "LordsDetails": {
+    "DateOfAnnouncement": "2015-08-27T00:00:00",
+    "DateOfIntroduction": "2015-10-20T00:00:00",
+    "DateOfWrit": "2015-10-01T00:00:00",
+    "MembershipTypes": {
+     "MembershipType": {
+      "Type": "Life peer",
+      "StartDate": "2015-10-01T00:00:00",
+      "EndDate": {
+       "@xsi:nil": "true",
+       "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+      }
+     }
+    },
+    "Oaths": {
+     "Oath": [
+      {
+       "Date": "2024-07-10T00:00:00"
+      },
+      {
+       "Date": "2022-09-10T00:00:00"
+      },
+      {
+       "Date": "2019-12-17T00:00:00"
+      },
+      {
+       "Date": "2017-06-13T00:00:00"
+      },
+      {
+       "Date": "2015-10-20T00:00:00"
+      }
+     ]
+    }
+   }
+  }
+ },
+ {
+  "@Member_Id": "4149",
+  "@Dods_Id": "25398",
+  "@Pims_Id": "2245",
+  "@Clerks_Id": "465",
+  "DisplayAs": "Lord Bannside",
+  "ListAs": "Bannside, L.",
+  "FullTitle": "The Rev and the Rt Hon. the Lord Bannside",
+  "LayingMinisterName": null,
+  "DateOfBirth": {
+   "@xsi:nil": "true",
+   "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+  },
+  "DateOfDeath": "2014-09-12T00:00:00",
+  "Gender": "M",
+  "Party": {
+   "@Id": "7",
+   "#text": "Democratic Unionist Party"
+  },
+  "House": "Lords",
+  "MemberFrom": "Life peer",
+  "HouseStartDate": "2010-06-18T00:00:00",
+  "HouseEndDate": "2014-09-12T00:00:00",
+  "CurrentStatus": {
+   "@Id": "",
+   "@IsActive": "False",
+   "Name": null,
+   "Reason": null,
+   "StartDate": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   }
+  },
+  "BasicDetails": {
+   "GivenSurname": "Paisley",
+   "GivenMiddleNames": null,
+   "GivenForename": "Ian",
+   "TownOfBirth": null,
+   "CountryOfBirth": null,
+   "Gender": "M",
+   "DateOfBirth": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfRetirement": {
+    "@xsi:nil": "true",
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+   },
+   "DateOfDeath": "2014-09-12T00:00:00",
+   "LordsDetails": {
+    "DateOfAnnouncement": "2010-05-28T00:00:00",
+    "DateOfIntroduction": "2010-07-05T00:00:00",
+    "DateOfWrit": "2010-06-18T00:00:00",
+    "MembershipTypes": {
+     "MembershipType": {
+      "Type": "Life peer",
+      "StartDate": "2010-06-18T00:00:00",
+      "EndDate": "2014-09-12T00:00:00"
+     }
+    },
+    "Oaths": {
+     "Oath": {
+      "Date": "2010-07-05T00:00:00"
+     }
+    }
+   }
+  }
+ }
+]

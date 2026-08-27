@@ -96,7 +96,8 @@ def fetch_mps(
             from_date=from_date,
             to_date=to_date)
         mps = mps.filter(
-            pl.col("mnis_id").is_in(matching_memberships["mnis_id"]))
+            pl.col("mnis_id").is_in(
+                matching_memberships["mnis_id"].implode()))
 
     # Tidy up and return
     return (
