@@ -1,6 +1,6 @@
 # mnis
 
-__mnis__ is a Python package for downloading data from the UK Parliament's [Members Names Information Service](http://data.parliament.uk/membersdataplatform/memberquery.aspx) (MNIS). It is a port of the R package [clmnis](https://github.com/houseofcommonslibrary/clmnis).
+__mnis__ is a Python package for downloading data from the UK Parliament's [Members Names Information Service](http://data.parliament.uk/membersdataplatform/memberquery.aspx) (MNIS). It is based on the R package [clmnis](https://github.com/houseofcommonslibrary/clmnis), updated to reflect changes to the MNIS API and to add new functionality.
 
 __Please note that this package is experimental. You should check the accuracy of the data against external sources when using it for research.__
 
@@ -9,7 +9,7 @@ The MNIS API is the public interface to the UK Parliament's Members Names Inform
 
 ## Version 2
 
-Version 2 is a complete rewrite of the previous Python `mnis` package. It is **not** backwards compatible with the previous version: it provides much broader functionality and presents a completely different API. It is essentially a Python port of the House of Commons Library's R package [clmnis](https://github.com/houseofcommonslibrary/clmnis).
+Version 2 is a complete rewrite of the previous Python `mnis` package. It is **not** backwards compatible with the previous version: it provides much broader functionality and presents a completely different API. Version 2 originated as a Python port of the House of Commons Library's R package [clmnis](https://github.com/houseofcommonslibrary/clmnis), which was then updated to reflect changes to the MNIS API and to add new functionality.
 
 ## Installation
 
@@ -579,4 +579,4 @@ A change in that diff which you did not intend is a bug.
 
 ## License
 
-This package is released under the [MIT License](LICENSE). It is a port of the House of Commons Library's R package [clmnis](https://github.com/houseofcommonslibrary/clmnis), which is distributed under the BSD 3-Clause License. The original copyright notice, list of conditions, and disclaimer are reproduced in [LICENSE-clmnis](LICENSE-clmnis) and are included in all source and binary distributions of this package.
+This package is released under the [MIT License](LICENSE). Version 2 is based on the House of Commons Library's R package [clmnis](https://github.com/houseofcommonslibrary/clmnis), which is distributed under the BSD 3-Clause License. The original copyright notice, list of conditions, and disclaimer are reproduced in [LICENSE-clmnis](LICENSE-clmnis) and are included in all source  binary distributions of this package.
