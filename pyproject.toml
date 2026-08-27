@@ -1,7 +1,7 @@
 [project]
 name = "mnis"
 version = "2.0.0"
-description = "A Python package for downloading data from the Parliamentary Members Names Information Service"
+description = "A Python package for downloading data from the UK Parliament's Members Names Information Service (MNIS) API"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE", "LICENSE-clmnis"]
