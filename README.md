@@ -20,7 +20,7 @@ You can install the latest version of the package from PyPI.
 Using `pip`.
 
 ```sh
- pip install mnis
+pip install mnis
 ```
 
 Using `uv`.
@@ -33,7 +33,7 @@ uv add mnis
 
 You can install the latest development version from GitHub.
 
-Uusing `pip`.
+Using `pip`.
 
 ```sh
 pip install git+https://github.com/olihawkins/mnis
