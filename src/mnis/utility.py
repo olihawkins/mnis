@@ -15,6 +15,10 @@ from mnis.constants import MNIS_API
 from mnis.errors import check_query_status
 from mnis.errors import date_format_error
 
+# Constants -------------------------------------------------------------------
+
+XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
+
 # API query functions ---------------------------------------------------------
 
 
@@ -37,8 +41,6 @@ def fetch_query_data(house: str, data_output: str) -> list[dict]:
 
 
 # Missing data functions ------------------------------------------------------
-
-XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
 
 
 def process_missing_values(data: list[dict], column: str) -> list[dict]:
