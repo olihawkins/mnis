@@ -13,7 +13,6 @@ from mnis.utility import parse_date
 
 # Filter dates ----------------------------------------------------------------
 
-
 def filter_dates(
         df: DataFrame,
         start_col: str,
@@ -107,9 +106,7 @@ def handle_date(d: str | datetime.date | None) -> datetime.date | None:
     else:
         raise ValueError(date_format_error(d))
 
-
 # Filter memberships ----------------------------------------------------------
-
 
 def filter_memberships(
         tm: DataFrame,

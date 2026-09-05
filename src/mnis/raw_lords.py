@@ -34,7 +34,6 @@ from mnis.utility import scalar
 
 # Raw Lord queries ------------------------------------------------------------
 
-
 def fetch_lords_raw() -> DataFrame:
     """Fetch key details: Lords."""
 

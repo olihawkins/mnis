@@ -1,5 +1,6 @@
 """Package errors"""
 
+# Errors ----------------------------------------------------------------------
 
 def missing_column_error(colname: str) -> str:
     """Report an error handling dataframes with missing columms.

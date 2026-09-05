@@ -1,5 +1,7 @@
 """Functions for extracting contact details for MPs"""
 
+# Imports ---------------------------------------------------------------------
+
 import datetime
 
 from polars import DataFrame
@@ -17,6 +19,7 @@ from mnis.mps import fetch_mps_addresses
 
 Date = str | datetime.date | None
 
+# Fetch functions -------------------------------------------------------------
 
 def fetch_mps_office_addresses(
         from_date: Date = None,

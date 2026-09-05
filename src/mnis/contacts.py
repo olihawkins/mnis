@@ -15,7 +15,6 @@ Date = str | datetime.date | None
 
 # Extract usernames -----------------------------------------------------------
 
-
 def extract_username(url: str) -> str | None:
     """Extract a username from a social media url.
 
@@ -29,9 +28,7 @@ def extract_username(url: str) -> str | None:
         return None
     return tokens[-1]
 
-
 # Office addresses ------------------------------------------------------------
-
 
 def fetch_members_office_addresses(
         fetch_members: Callable,
@@ -70,9 +67,7 @@ def fetch_members_office_addresses(
     return offices.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Email addresses -------------------------------------------------------------
-
 
 def fetch_members_email_addresses(
         fetch_members: Callable,
@@ -105,9 +100,7 @@ def fetch_members_email_addresses(
     return emails.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Phone numbers ---------------------------------------------------------------
-
 
 def fetch_members_phone_numbers(
         fetch_members: Callable,
@@ -140,9 +133,7 @@ def fetch_members_phone_numbers(
     return phones.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Fax numbers -----------------------------------------------------------------
-
 
 def fetch_members_fax_numbers(
         fetch_members: Callable,
@@ -175,9 +166,7 @@ def fetch_members_fax_numbers(
     return faxes.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Websites --------------------------------------------------------------------
-
 
 def fetch_members_websites(
         fetch_members: Callable,
@@ -210,9 +199,7 @@ def fetch_members_websites(
     return websites.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Twitter ---------------------------------------------------------------------
-
 
 def fetch_members_twitter(
         fetch_members: Callable,
@@ -252,9 +239,7 @@ def fetch_members_twitter(
     return accounts.filter(
         pl.col("mnis_id").is_in(members["mnis_id"].implode()))
 
-
 # Instagram -------------------------------------------------------------------
-
 
 def fetch_members_instagram(
         fetch_members: Callable,

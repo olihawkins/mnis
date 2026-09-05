@@ -14,9 +14,7 @@ Settings apply for the duration of a session. Use the functions in this
 module to read and change them rather than modifying this dict directly.
 """
 
-
 # Timeout ---------------------------------------------------------------------
-
 
 def get_timeout() -> float:
     """Return the number of seconds to wait for a response from MNIS.

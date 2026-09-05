@@ -40,7 +40,6 @@ Date = str | datetime.date | None
 
 # Fetch functions -------------------------------------------------------------
 
-
 def fetch_mps(
         from_date: Date = None,
         to_date: Date = None,

@@ -1,5 +1,7 @@
 """Functions for extracting contact details for Lords"""
 
+# Imports ---------------------------------------------------------------------
+
 import datetime
 
 from polars import DataFrame
@@ -17,6 +19,7 @@ from mnis.lords import fetch_lords_addresses
 
 Date = str | datetime.date | None
 
+# Fetch functions -------------------------------------------------------------
 
 def fetch_lords_office_addresses(
         from_date: Date = None,

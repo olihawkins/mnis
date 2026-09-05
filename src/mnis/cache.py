@@ -11,9 +11,7 @@ them from the cache if they are there. This means the data for each query
 is downloaded only once in a session.
 """
 
-
 # Clear cache -----------------------------------------------------------------
-
 
 def clear_cache() -> None:
     """Clear all data cached from MNIS.

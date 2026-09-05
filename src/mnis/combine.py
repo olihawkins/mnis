@@ -1,5 +1,7 @@
 """Functions for combining related records in a dataframe"""
 
+# Imports ---------------------------------------------------------------------
+
 import polars as pl
 
 from polars import Expr
@@ -7,7 +9,6 @@ from polars import DataFrame
 from polars import Series
 
 # Combine party memberships ---------------------------------------------------
-
 
 def combine_party_memberships(pm: DataFrame) -> DataFrame:
     """Combine consecutive records in a dataframe of party memberships.

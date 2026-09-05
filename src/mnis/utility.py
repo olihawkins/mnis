@@ -25,7 +25,6 @@ from mnis.settings import get_timeout
 
 # API query functions ---------------------------------------------------------
 
-
 def create_query(house: str, data_output: str) -> str:
     """Create query string."""
     return f"{MNIS_API}House={house}|Membership=all/{data_output}"
@@ -83,9 +82,7 @@ def fetch_query_data(house: str, data_output: str) -> list[dict]:
     query_data = json.loads(response.content.decode("utf-8-sig"))
     return query_data["Members"]["Member"]
 
-
 # Missing data functions ------------------------------------------------------
-
 
 def scalar(value: object) -> object:
     """Convert a raw JSON value to a scalar, mapping nil objects to None.
@@ -99,9 +96,7 @@ def scalar(value: object) -> object:
     """
     return None if isinstance(value, dict) else value
 
-
 # Data handling functions -----------------------------------------------------
-
 
 def extract_data_output(
         data_output: list[dict],
@@ -195,9 +190,7 @@ def process_lords_output(output_table: DataFrame) -> DataFrame:
     other_columns = [c for c in output.columns if c not in first_columns]
     return output.select(first_columns + other_columns)
 
-
 # Date handling functions -----------------------------------------------------
-
 
 def cast_date(date_num: float | None) -> datetime.date | None:
     """Cast a numeric value to a date."""

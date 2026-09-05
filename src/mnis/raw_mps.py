@@ -30,9 +30,7 @@ from mnis.utility import extract_data_output
 from mnis.utility import process_mps_output
 from mnis.utility import scalar
 
-
 # Raw MP queries --------------------------------------------------------------
-
 
 def fetch_mps_raw() -> DataFrame:
     """Fetch key details: MPs."""
